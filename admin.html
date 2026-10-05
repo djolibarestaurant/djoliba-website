@@ -355,13 +355,13 @@ function renderGrid() {
     const idx = menuItems.indexOf(item);
     return `
     <div class="item-card" id="card${idx}">
-      <div class="item-img-area" onclick="document.getElementById('file${idx}').click()">
+      <div class="item-img-area">
         <img src="${item.img}" alt="${item.name}" id="img${idx}"
           onerror="this.src='https://via.placeholder.com/340x180/2A1A0A/F0A500?text=Tap+to+Upload'">
         <span class="item-card-cat">${item.category}</span>
-        <button class="delete-btn-img" onclick="event.stopPropagation();deleteItem(${idx})">🗑</button>
+        <button class="delete-btn-img" onclick="event.stopPropagation();event.preventDefault();deleteItem(${idx});return false;">🗑</button>
         <div class="img-overlay">
-          <div class="img-overlay-text"><span>📸</span>Tap to change photo</div>
+          <div class="img-overlay-text"><span>📸</span><br><button onclick="event.stopPropagation();document.getElementById('file'+${idx}).click()" style="background:var(--gold);color:var(--dark);border:none;padding:0.5rem 1.2rem;border-radius:6px;font-weight:700;font-size:0.8rem;cursor:pointer;margin-top:8px;font-family:Outfit,sans-serif">Upload Photo</button></div>
         </div>
         <div class="upload-progress"><div class="upload-progress-bar" id="bar${idx}"></div></div>
       </div>
