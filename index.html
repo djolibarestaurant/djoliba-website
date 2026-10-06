@@ -1,184 +1,1203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DJOLIBA — Authentic Guinean Restaurant · Philadelphia, PA</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Bebas+Neue&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #C5192D; --red-dark: #8B0F1E;
+    --gold: #D4820A; --gold-light: #F0A500;
+    --green: #009460; --green-light: #00B873;
+    --cream: #F0FFF8; --dark: #E8F7F0;
+    --dark-mid: #D0EDE0; --dark-warm: #FFFFFF;
+    --text-light: #1A3D2B; --text-muted: #3D6B52;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'Outfit',sans-serif; background:#E8F7F0; color:#1A3D2B; overflow-x:hidden; }
+
+  nav, section, #hero, #about, #menu, #reviews, footer, .marquee-wrap, .info-band, .modal-overlay, .kente-strip {
+    position: relative;
+    z-index: 1;
+  }
+  ::-webkit-scrollbar{width:6px} ::-webkit-scrollbar-track{background:#E8F7F0} ::-webkit-scrollbar-thumb{background:var(--green);border-radius:3px}
+
+  .kente-strip { height:8px; background:repeating-linear-gradient(90deg,var(--red) 0px,var(--red) 20px,var(--gold) 20px,var(--gold) 40px,var(--green) 40px,var(--green) 60px,var(--gold) 60px,var(--gold) 80px); }
+
+  .guinea-flag { display:inline-flex; height:14px; border-radius:2px; overflow:hidden; vertical-align:middle; margin-left:6px; box-shadow:0 1px 4px rgba(0,0,0,.4); }
+  .guinea-flag span { display:block; width:10px; height:14px; }
+  .guinea-flag .fr { background:#CE1126; } .guinea-flag .fg { background:#FCD116; } .guinea-flag .fv { background:#009460; }
+
+  nav { position:fixed; top:8px; width:100%; z-index:1000; padding:0 5%; display:flex; align-items:center; justify-content:space-between; height:70px; background:rgba(255,255,255,0.95);backdrop-filter:blur(16px); backdrop-filter:blur(16px); border-bottom:1px solid rgba(0,148,96,0.2); }
+  .nav-logo { font-family:'Bebas Neue',sans-serif; font-size:2rem; letter-spacing:.12em; color:var(--green); text-decoration:none; display:flex; align-items:center; gap:10px; }
+  .nav-logo .dot { display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--red); }
+  .nav-links { display:flex; gap:2.5rem; list-style:none; align-items:center; }
+  .nav-links a { color:var(--muted); text-decoration:none; font-size:.85rem; font-weight:500; letter-spacing:.08em; text-transform:uppercase; transition:color .2s; }
+  .nav-links a:hover { color:var(--gold); }
+  .nav-cta { background:var(--red)!important; color:#1A3D2B!important; padding:.5rem 1.4rem!important; border-radius:3px; font-weight:600!important; }
+  .nav-cta:hover { background:var(--red-dark)!important; }
+  .nav-social { display:flex; align-items:center; justify-content:center; width:34px; height:34px; border:1px solid rgba(240,165,0,0.2); border-radius:6px; color:#3D6B52!important; transition:all 0.2s!important; }
+  .nav-social:hover { border-color:var(--gold)!important; color:var(--gold)!important; background:rgba(240,165,0,0.08); }
+
+  #hero { min-height:100vh; display:flex; align-items:center; position:relative; overflow:hidden; padding:0 5%; }
+  .hero-bg { position:absolute; inset:0; z-index:0; overflow:hidden; }
+  .hero-bg::before { 
+    content:''; 
+    position:absolute; 
+    inset:-10%; 
+    background:url('https://exploringed.com/wp-content/uploads/2025/11/27.png') center center / cover no-repeat;
+    animation:kenburns 20s ease-in-out infinite alternate;
+    filter:brightness(1.15) saturate(1.2);
+  }
+  @keyframes kenburns {
+    0%   { transform:scale(1.0) translate(0%, 0%); }
+    25%  { transform:scale(1.08) translate(-2%, 1%); }
+    50%  { transform:scale(1.12) translate(1%, -2%); }
+    75%  { transform:scale(1.06) translate(2%, 1%); }
+    100% { transform:scale(1.1) translate(-1%, 2%); }
+  }
+  .hero-bg::after { content:''; position:absolute; inset:0; background:linear-gradient(90deg,rgba(0,0,0,0.45) 0%,rgba(0,0,0,0.1) 50%,rgba(0,0,0,0.0) 100%); z-index:1; }
+  .hero-content { position:relative; z-index:3; max-width:700px; }
+  .hero-pattern { position:absolute; right:-80px; top:50%; transform:translateY(-50%); width:650px; height:650px; opacity:.07; pointer-events:none; }
 
 
-DJOLIBA
+  .hero-badge { display:inline-flex; align-items:center; gap:8px; background:rgba(240,165,0,.12); border:1px solid rgba(240,165,0,.3); color:var(--gold-light); font-size:.75rem; letter-spacing:.15em; text-transform:uppercase; font-weight:600; padding:.4rem 1rem; border-radius:100px; margin-bottom:2rem; animation:fadeUp .8s ease forwards; }
+  .hero-badge::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--gold); animation:pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.4)} }
+
+  .hero-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(5rem,12vw,10rem); line-height:.9; letter-spacing:.03em; color:var(--text); margin-bottom:.5rem; animation:fadeUp .8s .1s ease both; }
+  .hero-title .accent { color:var(--gold); } .hero-title .accent-red { color:var(--red); }
+  .hero-subtitle { font-family:'Cormorant Garamond',serif; font-size:clamp(1.2rem,2.5vw,1.7rem); font-style:italic; color:#3D6B52; margin-bottom:1.5rem; letter-spacing:.05em; animation:fadeUp .8s .2s ease both; }
+  .hero-desc { font-size:1rem; color:#3D6B52; line-height:1.75; max-width:520px; margin-bottom:2.5rem; font-weight:300; animation:fadeUp .8s .3s ease both; }
+  .hero-actions { display:flex; gap:1rem; flex-wrap:wrap; animation:fadeUp .8s .4s ease both; }
+
+  .btn-primary { background:var(--gold); color:var(--dark); padding:.9rem 2rem; border:none; border-radius:3px; font-size:.9rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:8px; transition:all .2s; }
+  .btn-primary:hover { background:var(--gold-light); transform:translateY(-2px); }
+  .btn-outline { background:transparent; color:#1A3D2B; padding:.9rem 2rem; border:1px solid rgba(245,232,208,.25); border-radius:3px; font-size:.9rem; font-weight:500; letter-spacing:.08em; text-transform:uppercase; cursor:pointer; text-decoration:none; transition:all .2s; }
+  .btn-outline:hover { border-color:var(--gold); color:var(--gold); transform:translateY(-2px); }
+
+  .hero-stats { display:flex; gap:3rem; margin-top:3.5rem; padding-top:2rem; border-top:1px solid rgba(255,255,255,.07); animation:fadeUp .8s .5s ease both; }
+  .hero-stat-num { font-family:'Bebas Neue',sans-serif; font-size:2.5rem; color:var(--gold); line-height:1; }
+  .hero-stat-label { font-size:.75rem; color:#3D6B52; text-transform:uppercase; letter-spacing:.1em; margin-top:.3rem; }
+
+  .hero-food-grid { position:absolute; right:5%; top:50%; transform:translateY(-50%); display:grid; grid-template-columns:1fr 1fr; gap:12px; width:420px; animation:fadeLeft 1s .3s ease both; z-index:2; }
+  @keyframes fadeLeft { from{opacity:0;transform:translateY(-50%) translateX(40px)} to{opacity:1;transform:translateY(-50%) translateX(0)} }
+  .food-card-img { border-radius:8px; overflow:hidden; position:relative; background:var(--dark-warm); border:1px solid rgba(240,165,0,.1); }
+  .food-card-img:nth-child(1){grid-column:1/3;height:220px} .food-card-img:nth-child(2){height:160px} .food-card-img:nth-child(3){height:160px}
+  .food-card-img img { width:100%; height:100%; object-fit:cover; transition:transform .5s; }
+  .food-card-img:hover img { transform:scale(1.06); }
+  .food-card-label { position:absolute; bottom:8px; left:8px; background:rgba(0,0,0,.65); backdrop-filter:blur(6px); color:var(--gold-light); font-size:.7rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase; padding:3px 8px; border-radius:2px; }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+
+  .marquee-wrap { background:var(--red-dark); overflow:hidden; padding:12px 0; border-top:1px solid rgba(240,165,0,.2); border-bottom:1px solid rgba(240,165,0,.2); }
+  .marquee-track { display:flex; width:max-content; animation:marquee 30s linear infinite; }
+  .marquee-track span { font-family:'Bebas Neue',sans-serif; font-size:1.1rem; letter-spacing:.2em; color:#FFFFFF; padding:0 2.5rem; font-weight:700; }
+  .marquee-track span.dot { color:#FFD166; padding:0; font-size:1.3rem; }
+  @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+  section { padding:100px 5%; }
+  .section-label { display:inline-flex; align-items:center; gap:10px; font-size:.72rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); margin-bottom:1.2rem; }
+  .section-label::before { content:''; display:block; width:28px; height:2px; background:var(--gold); }
+  .section-title { font-family:'Cormorant Garamond',serif; font-size:clamp(2.2rem,5vw,3.5rem); font-weight:600; line-height:1.15; color:var(--text); margin-bottom:1rem; }
+  .section-title em { color:var(--gold); font-style:italic; }
+
+  #about { background:#D4EFE2; display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; }
+  .about-image-stack { position:relative; height:580px; }
+  .interior-collage { display:grid; grid-template-columns:1fr 1fr; gap:10px; height:100%; border-radius:10px; overflow:hidden; }
+  .collage-left { overflow:hidden; border-radius:8px 0 0 8px; }
+  .collage-left img { width:100%; height:100%; object-fit:cover; object-position:center top; transition:transform 0.5s; }
+  .collage-left:hover img { transform:scale(1.04); }
+  .collage-right { display:grid; grid-template-rows:1fr 1fr; gap:10px; }
+  .collage-right img { width:100%; height:100%; object-fit:cover; object-position:center; border-radius:4px; transition:transform 0.5s; }
+  .collage-right img:last-child { object-fit:cover; object-position:center top; }
+  .collage-right img:hover { transform:scale(1.04); }
+  .about-img-main { width:78%; height:400px; object-fit:cover; border-radius:8px; position:absolute; bottom:0; left:0; border:3px solid var(--dark-warm); }
+  .about-img-accent { width:55%; height:260px; object-fit:cover; border-radius:8px; position:absolute; top:0; right:0; border:3px solid var(--dark-warm); }
+  .about-badge { position:absolute; bottom:40px; right:-10px; background:var(--gold); color:var(--dark); padding:1.2rem 1.5rem; border-radius:8px; text-align:center; box-shadow:0 12px 40px rgba(0,0,0,.5); }
+  .about-badge .num { font-family:'Bebas Neue',sans-serif; font-size:2.5rem; line-height:1; }
+  .about-badge .lbl { font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; }
+  .about-text p { font-size:1rem; color:var(--muted); line-height:1.85; margin-bottom:1.2rem; font-weight:300; }
+  .about-features { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:2rem; }
+  .about-feat { display:flex; align-items:flex-start; gap:12px; padding:1rem; background:rgba(240,165,0,.05); border:1px solid rgba(240,165,0,.1); border-radius:6px; }
+  .about-feat-icon { font-size:1.4rem; flex-shrink:0; margin-top:2px; }
+  .about-feat h4 { font-size:.85rem; font-weight:600; color:#1A3D2B; margin-bottom:3px; }
+  .about-feat p { font-size:.78rem; color:#3D6B52; margin:0; line-height:1.5; }
+
+  #menu { background:#E8F7F0; }
+  .menu-header { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:3rem; flex-wrap:wrap; gap:1rem; }
+  .menu-filters { display:flex; gap:.5rem; flex-wrap:wrap; }
+  .filter-btn { background:transparent; border:1px solid rgba(255,255,255,.12); color:#3D6B52; padding:.4rem 1rem; border-radius:100px; font-size:.8rem; font-family:'Outfit',sans-serif; cursor:pointer; transition:all .2s; }
+  .filter-btn.active,.filter-btn:hover { background:var(--red); border-color:var(--red); color:#1A3D2B; }
+  .menu-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:1.5rem; }
+  .menu-item { background:#FFFFFF; border:1px solid rgba(0,148,96,.2); border-radius:10px; overflow:hidden; transition:all .3s; cursor:pointer; box-shadow:0 2px 12px rgba(0,148,96,0.1); }
+  .menu-item:hover { transform:translateY(-4px); border-color:rgba(240,165,0,.25); box-shadow:0 16px 50px rgba(0,0,0,.4); }
+  .menu-item-img { height:190px; position:relative; overflow:hidden; }
+  .menu-item-img img { width:100%; height:100%; object-fit:cover; transition:transform .5s; }
+  .menu-item:hover .menu-item-img img { transform:scale(1.07); }
+  .menu-tag { position:absolute; top:10px; left:10px; background:var(--red); color:#1A3D2B; font-size:.65rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; padding:3px 8px; border-radius:2px; }
+  .menu-tag.halal{background:var(--green)} .menu-tag.special{background:var(--gold);color:var(--dark)}
+  .menu-item-body { padding:1.2rem; }
+  .menu-item-name { font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-weight:600; color:var(--text); margin-bottom:.4rem; }
+  .menu-item-desc { font-size:.82rem; color:#3D6B52; line-height:1.6; margin-bottom:1rem; }
+  .menu-item-footer { display:flex; align-items:center; justify-content:space-between; }
+  .menu-price { font-family:'Bebas Neue',sans-serif; font-size:1.5rem; color:var(--gold); letter-spacing:.05em; }
+  .order-dd-btn { background:var(--red); color:#1A3D2B; text-decoration:none; padding:0.4rem 1rem; border-radius:4px; font-size:0.78rem; font-weight:700; letter-spacing:0.05em; transition:all .2s; white-space:nowrap; }
+  .order-dd-btn:hover { background:var(--gold); color:var(--dark); }
+
+  #order { background:var(--dark-mid); }
+  .order-layout { display:grid; grid-template-columns:1fr 400px; gap:3rem; align-items:start; }
+  .cart-panel { background:var(--dark-warm); border:1px solid rgba(240,165,0,.15); border-radius:12px; position:sticky; top:90px; overflow:hidden; }
+  .cart-header { background:var(--red-dark); padding:1.2rem 1.5rem; display:flex; align-items:center; justify-content:space-between; }
+  .cart-header h3 { font-family:'Bebas Neue',sans-serif; font-size:1.3rem; letter-spacing:.1em; color:var(--gold); }
+  .cart-count { background:var(--gold); color:var(--dark); font-size:.75rem; font-weight:700; width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; }
+  .cart-body { padding:1.5rem; }
+  .cart-empty { text-align:center; padding:2rem 0; color:#3D6B52; font-size:.9rem; }
+  .cart-empty span { font-size:2.5rem; display:block; margin-bottom:.5rem; }
+  .cart-item { display:flex; align-items:center; gap:12px; padding:.8rem 0; border-bottom:1px solid rgba(255,255,255,.06); }
+  .cart-item-name { flex:1; font-size:.88rem; color:#1A3D2B; font-weight:500; }
+  .cart-item-controls { display:flex; align-items:center; gap:8px; }
+  .cart-item-controls button { background:rgba(255,255,255,.08); border:none; color:#1A3D2B; width:24px; height:24px; border-radius:4px; cursor:pointer; font-size:.9rem; display:flex; align-items:center; justify-content:center; font-family:'Outfit',sans-serif; transition:background .2s; }
+  .cart-item-controls button:hover { background:var(--red); }
+  .cart-item-qty { font-size:.9rem; color:#1A3D2B; min-width:20px; text-align:center; }
+  .cart-item-price { font-family:'Bebas Neue',sans-serif; font-size:1.1rem; color:var(--gold); min-width:50px; text-align:right; }
+  .cart-summary { margin-top:1.5rem; padding-top:1rem; border-top:1px solid rgba(255,255,255,.08); }
+  .cart-summary-row { display:flex; justify-content:space-between; font-size:.85rem; color:#3D6B52; margin-bottom:.5rem; }
+  .cart-summary-row.total { color:#1A3D2B; font-size:1rem; font-weight:600; border-top:1px solid rgba(255,255,255,.08); padding-top:.5rem; margin-top:.5rem; }
+  .checkout-btn { width:100%; background:var(--gold); color:var(--dark); border:none; padding:1rem; border-radius:6px; font-size:.9rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; cursor:pointer; margin-top:1rem; font-family:'Outfit',sans-serif; transition:all .2s; }
+  .checkout-btn:hover { background:var(--gold-light); }
+  .order-type-tabs { display:flex; gap:.5rem; margin:1.5rem 0 2rem; }
+  .tab-btn { flex:1; padding:.9rem; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1); color:#3D6B52; border-radius:6px; cursor:pointer; font-family:'Outfit',sans-serif; font-size:.85rem; font-weight:500; transition:all .2s; text-align:center; }
+  .tab-btn.active { background:rgba(197,25,45,.15); border-color:var(--red); color:#1A3D2B; }
+  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem; }
+  .form-group { display:flex; flex-direction:column; gap:6px; }
+  .form-group.full { grid-column:1/3; }
+  .form-group label { font-size:.75rem; font-weight:600; text-transform:uppercase; letter-spacing:.1em; color:#3D6B52; }
+  .form-group input,.form-group select,.form-group textarea { background:var(--dark-warm); border:1px solid rgba(255,255,255,.1); color:#1A3D2B; padding:.8rem 1rem; border-radius:6px; font-size:.9rem; font-family:'Outfit',sans-serif; outline:none; transition:border .2s; }
+  .form-group input:focus,.form-group select:focus,.form-group textarea:focus { border-color:var(--gold); }
+  .form-group select option { background:var(--dark-warm); }
+  .form-group textarea { resize:vertical; min-height:80px; }
+  .compliance-box { background:rgba(26,122,74,.1); border:1px solid rgba(26,122,74,.3); border-radius:8px; padding:1.2rem; margin:1.5rem 0; }
+  .compliance-box h4 { font-size:.8rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--green-light); margin-bottom:.8rem; display:flex; align-items:center; gap:6px; }
+  .compliance-check { display:flex; align-items:flex-start; gap:10px; margin-bottom:.6rem; }
+  .compliance-check input[type=checkbox] { width:16px; height:16px; accent-color:var(--green); margin-top:2px; flex-shrink:0; }
+  .compliance-check label { font-size:.78rem; color:#3D6B52; line-height:1.5; text-transform:none; letter-spacing:0; font-weight:400; }
+  .compliance-check a { color:var(--gold); }
+  .payment-methods { display:flex; gap:.5rem; margin-bottom:1.5rem; flex-wrap:wrap; }
+  .pay-option { flex:1; min-width:90px; padding:.7rem .5rem; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1); border-radius:6px; text-align:center; cursor:pointer; transition:all .2s; color:#3D6B52; font-size:.8rem; font-weight:500; }
+  .pay-option.active { border-color:var(--gold); background:rgba(240,165,0,.08); color:var(--gold); }
+  .pay-option .pay-icon { font-size:1.3rem; display:block; margin-bottom:4px; }
+  .submit-order-btn { width:100%; background:linear-gradient(135deg,var(--red),var(--red-dark)); color:#1A3D2B; border:none; padding:1.1rem; border-radius:8px; font-size:1rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; cursor:pointer; font-family:'Outfit',sans-serif; transition:all .2s; box-shadow:0 6px 24px rgba(197,25,45,.35); display:flex; align-items:center; justify-content:center; gap:8px; }
+  .submit-order-btn:hover { transform:translateY(-2px); box-shadow:0 10px 32px rgba(197,25,45,.5); }
+
+  #reviews { background:#F0FFF8; }
+  .reviews-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1.5rem; margin-top:3rem; }
+  .review-card { background:#FFFFFF; border:1px solid rgba(0,148,96,.2); border-radius:10px; padding:1.8rem; transition:border-color .3s; position:relative; box-shadow:0 2px 12px rgba(0,148,96,0.1); }
+  .review-card:hover { border-color:rgba(240,165,0,.2); }
+  .google-badge { position:absolute; top:1.2rem; right:1.2rem; font-size:.65rem; color:#3D6B52; display:flex; align-items:center; gap:4px; }
+  .google-g { width:16px; height:16px; border-radius:50%; background:#fff; display:flex; align-items:center; justify-content:center; font-size:.6rem; font-weight:700; color:#4285F4; }
+  .review-stars { color:var(--gold); font-size:1rem; letter-spacing:2px; margin-bottom:1rem; }
+  .review-text { font-family:'Cormorant Garamond',serif; font-size:1.05rem; font-style:italic; color:#3D6B52; line-height:1.75; margin-bottom:1.2rem; }
+  .reviewer { display:flex; align-items:center; gap:10px; }
+  .reviewer-avatar { width:38px; height:38px; border-radius:50%; background:linear-gradient(135deg,var(--red),var(--gold)); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:.9rem; color:#1A3D2B; flex-shrink:0; }
+  .reviewer-name { font-size:.88rem; font-weight:600; color:#1A3D2B; }
+  .reviewer-loc { font-size:.75rem; color:#3D6B52; }
+
+  .info-band { background:var(--red-dark); padding:60px 5%; display:grid; grid-template-columns:repeat(4,1fr); gap:2rem; text-align:center; border-top:2px solid rgba(240,165,0,.2); }
+  .info-item h3 { font-family:'Bebas Neue',sans-serif; font-size:1.1rem; letter-spacing:.12em; color:var(--gold); margin-bottom:.5rem; }
+  .info-item p { font-size:.85rem; color:rgba(255,255,255,0.95); line-height:1.6; }
+  .info-item a { color:var(--gold-light); text-decoration:none; }
+  .info-item a:hover { text-decoration:underline; }
+
+  footer { background:#D4EFE2; padding:60px 5% 30px; border-top:1px solid rgba(0,148,96,.2); }
+  .footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:3rem; margin-bottom:3rem; }
+  .footer-brand p { font-size:.88rem; color:#3D6B52; line-height:1.75; margin-top:1rem; max-width:280px; }
+  .footer-logo { font-family:'Bebas Neue',sans-serif; font-size:2.2rem; letter-spacing:.12em; color:var(--gold); }
+  .footer-col h4 { font-size:.75rem; font-weight:700; text-transform:uppercase; letter-spacing:.15em; color:#1A3D2B; margin-bottom:1.2rem; }
+  .footer-col ul { list-style:none; }
+  .footer-col ul li { margin-bottom:.65rem; }
+  .footer-col ul li a { color:#3D6B52; text-decoration:none; font-size:.88rem; transition:color .2s; }
+  .footer-col ul li a:hover { color:var(--gold); }
+  .footer-bottom { border-top:1px solid rgba(255,255,255,.06); padding-top:1.5rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; }
+  .footer-bottom p { font-size:.8rem; color:var(--muted); }
+  .footer-bottom a { color:var(--gold); text-decoration:none; }
+  .social-links { display:flex; gap:.8rem; }
+  .social-link { width:36px; height:36px; border:1px solid rgba(255,255,255,.12); border-radius:6px; display:flex; align-items:center; justify-content:center; color:#3D6B52; text-decoration:none; font-size:.9rem; transition:all .2s; }
+  .social-link:hover { border-color:var(--gold); color:var(--gold); }
+
+  .modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.8); z-index:9999; align-items:center; justify-content:center; backdrop-filter:blur(6px); }
+  .modal-overlay.show { display:flex; }
+  .modal-box { background:var(--dark-warm); border:1px solid rgba(240,165,0,.2); border-radius:16px; padding:3rem; text-align:center; max-width:420px; width:90%; animation:popIn .3s ease; }
+  @keyframes popIn { from{transform:scale(.8);opacity:0} to{transform:scale(1);opacity:1} }
+  .modal-icon { font-size:4rem; margin-bottom:1rem; }
+  .modal-box h3 { font-family:'Bebas Neue',sans-serif; font-size:2rem; letter-spacing:.1em; color:var(--gold); margin-bottom:.5rem; }
+  .modal-box p { font-size:.9rem; color:#3D6B52; line-height:1.7; margin-bottom:1.5rem; }
+  .modal-close { background:var(--gold); color:var(--dark); border:none; padding:.8rem 2rem; border-radius:6px; font-weight:700; font-size:.9rem; cursor:pointer; font-family:'Outfit',sans-serif; letter-spacing:.08em; text-transform:uppercase; }
+
+  @media(max-width:1100px){.hero-food-grid{display:none}#about{grid-template-columns:1fr}.about-image-stack{height:300px}.order-layout{grid-template-columns:1fr}.cart-panel{position:static}}
+  /* ─── HAMBURGER ─────────────────────────── */
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;z-index:1001}
+.hamburger span{display:block;width:24px;height:2px;background:var(--gold);border-radius:2px;transition:all 0.3s}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+
+/* ─── TABLET ─────────────────────────────── */
+@media(max-width:900px){
+  .order-layout{grid-template-columns:1fr}
+  .cart-panel{position:static}
+  #about{grid-template-columns:1fr}
+  .about-image-stack{height:320px}
+  .hero-food-grid{display:none}
+}
+
+/* Mobile nav open */
+@media(max-width:768px){
+  .hamburger{display:flex}
+  #navLinks.mobile-open{
+    display:flex!important;
+    flex-direction:column;
+    position:fixed;
+    top:68px;left:0;right:0;
+    background:rgba(15,10,5,0.98);
+    backdrop-filter:blur(20px);
+    padding:1.5rem 5%;
+    border-bottom:1px solid rgba(240,165,0,0.2);
+    gap:1.2rem;
+    z-index:999;
+    animation:fadeUp 0.2s ease;
+  }
+  #navLinks.mobile-open a{font-size:1rem;color:#1A3D2B}
+  #navLinks.mobile-open .nav-cta{text-align:center;padding:0.8rem!important}
+  #navLinks.mobile-open .nav-social{width:auto;border:none;font-size:1rem}
+}
+
+/* ─── MOBILE ─────────────────────────────── */
+@media(max-width:768px){
+  /* Nav */
+  nav{padding:0 4%;height:60px}
+  .nav-links{display:none}
+  .nav-logo{font-size:1.6rem}
+
+  /* Hero */
+  #hero{padding:80px 4% 60px;min-height:auto;text-align:center}
+  .hero-content{max-width:100%}
+  .hero-badge{font-size:0.65rem;padding:0.3rem 0.8rem}
+  .hero-title{font-size:clamp(4rem,18vw,6rem)}
+  .hero-subtitle{font-size:1.1rem}
+  .hero-desc{font-size:0.9rem;margin:0 auto 2rem}
+  .hero-actions{justify-content:center}
+  .hero-stats{justify-content:center;gap:1.5rem}
+  .hero-stat-num{font-size:2rem}
+  .hero-food-grid{display:none}
+
+  /* Sections */
+  section{padding:60px 4%}
+  .section-title{font-size:2rem}
+
+  /* About */
+  #about{grid-template-columns:1fr;gap:2rem;padding:60px 4%}
+  .about-image-stack{height:280px}
+  .about-img-main{width:75%;height:220px}
+  .about-img-accent{width:50%;height:160px}
+  .about-badge{right:0}
+  .about-features{grid-template-columns:1fr}
+
+  /* Menu */
+  .menu-header{flex-direction:column;align-items:flex-start}
+  .menu-filters{gap:0.4rem}
+  .filter-btn{font-size:0.72rem;padding:0.35rem 0.8rem}
+  .menu-grid{grid-template-columns:1fr 1fr;gap:1rem}
+  .menu-item-img{height:150px}
+  .menu-item-name{font-size:1.1rem}
+  .menu-item-desc{font-size:0.75rem}
+  .menu-price{font-size:1.3rem}
+
+  /* Order */
+  #order{padding:60px 4%}
+  .order-type-tabs{gap:0.4rem}
+  .tab-btn{font-size:0.75rem;padding:0.7rem 0.5rem}
+  .form-row{grid-template-columns:1fr}
+  .form-group.full{grid-column:1}
+  .payment-methods{gap:0.4rem}
+  .pay-option{min-width:70px;font-size:0.72rem;padding:0.6rem 0.3rem}
+
+  /* Cart */
+  .cart-panel{margin-top:2rem}
+
+  /* Reviews */
+  .reviews-grid{grid-template-columns:1fr}
+
+  /* Info band */
+  .info-band{grid-template-columns:1fr 1fr;gap:1.5rem;padding:40px 4%}
+
+  /* Footer */
+  .footer-grid{grid-template-columns:1fr;gap:1.5rem}
+  .footer-bottom{flex-direction:column;text-align:center}
+  .social-links{justify-content:center}
+}
+
+/* ─── MOBILE CART ───────────────────────── */
+@media(max-width:900px){
+  .order-layout{display:flex;flex-direction:column}
+  .cart-panel{order:-1;margin-bottom:2rem}
+}
+
+/* ─── SMALL PHONES ───────────────────────── */
+@media(max-width:400px){
+  .menu-grid{grid-template-columns:1fr}
+  .hero-title{font-size:4rem}
+  .info-band{grid-template-columns:1fr}
+  .hero-stats{flex-wrap:wrap;justify-content:center;gap:1rem}
+  .order-type-tabs{flex-direction:column}
+  .tab-btn{width:100%}
+}
+
+  #gallery img:hover { transform:scale(1.06); }
+  @media(max-width:768px) {
+    #gallery > div > div { grid-template-columns:1fr 1fr!important; }
+  }
+  @media(max-width:480px) {
+    #gallery > div > div { grid-template-columns:1fr!important; }
+  }
+
+  /* Hero text visibility overrides */
+  #hero .hero-title{color:#FFFFFF!important;text-shadow:0 3px 15px rgba(0,0,0,0.95),0 1px 4px rgba(0,0,0,0.95)!important}
+  #hero .hero-subtitle{color:#FFFFFF!important;text-shadow:0 2px 10px rgba(0,0,0,0.9)!important}
+  #hero .hero-desc{color:rgba(255,255,255,0.95)!important;text-shadow:0 1px 8px rgba(0,0,0,0.9)!important}
+  #hero .hero-stat-num{color:#FFD166!important;text-shadow:0 2px 10px rgba(0,0,0,0.9)!important}
+  #hero .hero-stat-label{color:rgba(255,255,255,0.9)!important;text-shadow:0 1px 6px rgba(0,0,0,0.9)!important}
+  #hero .hero-badge{background:rgba(0,0,0,0.5)!important;border:1px solid rgba(255,255,255,0.5)!important;color:#FFFFFF!important}
+  #hero .btn-outline{background:rgba(0,0,0,0.35)!important;border-color:rgba(255,255,255,0.7)!important;color:#FFFFFF!important}
+  #hero .hero-stats{border-top:1px solid rgba(255,255,255,0.3)!important}
+</style>
+</head>
+<body>
+
+<div class="kente-strip"></div>
+
+<nav>
+  <a href="#hero" class="nav-logo">
+    <span class="dot"></span> DJOLIBA
+    <div class="guinea-flag"><span class="fr"></span><span class="fg"></span><span class="fv"></span></div>
+  </a>
+  <button class="hamburger" onclick="toggleMobileMenu()" id="hamburgerBtn">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">Our Story</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li>
+      <a href="https://www.instagram.com/djolibarestaurantphilly/" target="_blank" class="nav-social" title="Instagram">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.8"/>
+          <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.8"/>
+          <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/>
+        </svg>
+      </a>
+    </li>
+    <li>
+      <a href="https://www.tiktok.com/@djolibarestaurantphilly" target="_blank" class="nav-social" title="TikTok">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.75a4.85 4.85 0 01-1.01-.06z"/>
+        </svg>
+      </a>
+    </li>
+    <li>
+      <a href="https://www.doordash.com/store/djoliba-philadelphia-31716157/" target="_blank" class="nav-social" title="Order on DoorDash">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/>
+        </svg>
+      </a>
+    </li>
+    <li><a href="https://www.doordash.com/store/djoliba-philadelphia-31716157/" target="_blank" class="nav-cta">🛵 Order Now</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-bg"></div>
+  <svg class="hero-pattern" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" fill="none">
+    <circle cx="200" cy="200" r="180" stroke="#F0A500" stroke-width="1.5"/>
+    <circle cx="200" cy="200" r="140" stroke="#C5192D" stroke-width="1"/>
+    <circle cx="200" cy="200" r="100" stroke="#1A7A4A" stroke-width="1.5"/>
+    <circle cx="200" cy="200" r="60" stroke="#F0A500" stroke-width="1"/>
+    <line x1="20" y1="200" x2="380" y2="200" stroke="#F0A500" stroke-width="0.8"/>
+    <line x1="200" y1="20" x2="200" y2="380" stroke="#F0A500" stroke-width="0.8"/>
+    <line x1="73" y1="73" x2="327" y2="327" stroke="#C5192D" stroke-width="0.6"/>
+    <line x1="327" y1="73" x2="73" y2="327" stroke="#C5192D" stroke-width="0.6"/>
+    <polygon points="200,30 370,120 370,280 200,370 30,280 30,120" stroke="#1A7A4A" stroke-width="1" fill="none"/>
+  </svg>
+  <div class="hero-content">
+    <div class="hero-badge">🇬🇳 Authentic Guinean Cuisine · 6735 Elmwood Ave, Philadelphia PA</div>
+    <h1 class="hero-title">DJO<span class="accent">LI</span><span class="accent-red">BA</span></h1>
+    <p class="hero-subtitle">The taste of Guinea — right here in Philadelphia</p>
+    <p class="hero-desc">Authentic Guinean dishes made with love, tradition, and the bold spices of Conakry. From Poulet DG to Riz Gras, Soupe Kandia to Gigot d'Agneau — every plate is a journey home.</p>
+    <div class="hero-actions">
+      <a href="https://www.doordash.com/store/djoliba-philadelphia-31716157/" target="_blank" class="btn-primary">🚗 DoorDash</a>
+      <a href="https://www.ubereats.com/store/djoliba-6735-elmwood-avenue/uOYLNBFFW3WuG21foNTmFw" target="_blank" class="btn-primary" style="background:var(--dark-warm);border:1px solid rgba(240,165,0,0.3);color:var(--gold)">🚲 Uber Eats</a>
+      <a href="#menu" class="btn-outline">View Menu</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="hero-stat-num">100%</div><div class="hero-stat-label">Halal Certified</div></div>
+      <div><div class="hero-stat-num">4.8★</div><div class="hero-stat-label">Google Rating</div></div>
+      <div><div class="hero-stat-num">🇬🇳</div><div class="hero-stat-label">Proudly Guinean</div></div>
+    </div>
+  </div>
+  <div class="hero-food-grid">
+    <div class="food-card-img"><img src="https://raw.githubusercontent.com/djolibarestaurant/djoliba-website/main/IMG_5636.jpeg" alt="Jollof Rice & Fish"><span class="food-card-label">Jollof & Fish</span></div>
+    <div class="food-card-img"><img src="https://raw.githubusercontent.com/djolibarestaurant/djoliba-website/main/IMG_5631.jpeg" alt="Djoliba food spread"><span class="food-card-label">Our Spread</span></div>
+    <div class="food-card-img"><img src="https://raw.githubusercontent.com/djolibarestaurant/djoliba-website/main/IMG_6040.jpeg" alt="Djoliba interior"><span class="food-card-label">Our Space</span></div>
+  </div>
+</section>
+
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>DRIED RICE LAFIDI</span><span class="dot">✦</span><span>GRILLED LAMB STEAK</span><span class="dot">✦</span><span>DICED LAMB DIBI</span><span class="dot">✦</span><span>LAMB SHANK GIGOT</span><span class="dot">✦</span><span>GRILLED TILAPIA</span><span class="dot">✦</span><span>PEANUT BUTTER SOUP</span><span class="dot">✦</span><span>CASSAVA LEAVES TADAI</span><span class="dot">✦</span><span>POTATO GREENS</span><span class="dot">✦</span><span>FRIED SNAPPER</span><span class="dot">✦</span><span>SORREL BISSAP</span><span class="dot">✦</span><span>GINGER SLUSHY</span><span class="dot">✦</span>
+    <span>DRIED RICE LAFIDI</span><span class="dot">✦</span><span>GRILLED LAMB STEAK</span><span class="dot">✦</span><span>DICED LAMB DIBI</span><span class="dot">✦</span><span>LAMB SHANK GIGOT</span><span class="dot">✦</span><span>GRILLED TILAPIA</span><span class="dot">✦</span><span>PEANUT BUTTER SOUP</span><span class="dot">✦</span><span>CASSAVA LEAVES TADAI</span><span class="dot">✦</span><span>POTATO GREENS</span><span class="dot">✦</span><span>FRIED SNAPPER</span><span class="dot">✦</span><span>SORREL BISSAP</span><span class="dot">✦</span><span>GINGER SLUSHY</span><span class="dot">✦</span>
+  </div>
+</div>
+
+<section id="about">
+  <div class="about-image-stack">
+    <!-- Fused interior collage -->
+    <div class="interior-collage">
+      <div class="collage-left">
+        <img src="https://raw.githubusercontent.com/djolibarestaurant/djoliba-website/main/IMG_6040.jpeg" alt="Djoliba Restaurant interior">
+      </div>
+      <div class="collage-right">
+        <img src="https://raw.githubusercontent.com/djolibarestaurant/djoliba-website/main/IMG_6044.jpeg" alt="Djoliba Restaurant dining area">
+        <img src="https://raw.githubusercontent.com/djolibarestaurant/djoliba-website/main/IMG_5631.jpeg" alt="Djoliba signature dishes">
+      </div>
+    </div>
+    <div class="about-badge">
+      <div class="num">🇬🇳</div>
+      <div class="lbl">Guinean<br>Cuisine</div>
+    </div>
+  </div>
+  <div class="about-text">
+    <div class="section-label">Our Story</div>
+    <h2 class="section-title">Guinea on a <em>Plate</em></h2>
+    <p>DJOLIBA — named after the Mandinka word for the mighty Niger River — was born from a deep love of Guinean culture, community, and cuisine. We bring the authentic tastes of Conakry directly to Philadelphia at 6735 Elmwood Ave.</p>
+    <p>Every dish we serve is made with time-honored recipes, fresh ingredients, and the spices that define Guinean cooking. Whether you grew up eating Riz Gras on Sundays or are discovering Poulet DG for the very first time — you are welcome here.</p>
+    <div class="about-features">
+      <div class="about-feat"><span class="about-feat-icon">🕌</span><div><h4>100% Halal</h4><p>All meats are halal certified, always.</p></div></div>
+      <div class="about-feat"><span class="about-feat-icon">🌿</span><div><h4>Fresh Daily</h4><p>Prepared fresh every morning with quality ingredients.</p></div></div>
+      <div class="about-feat"><span class="about-feat-icon">🇬🇳</span><div><h4>Proudly Guinean</h4><p>Authentic recipes from Guinea, served with pride.</p></div></div>
+      <div class="about-feat"><span class="about-feat-icon">🚗</span><div><h4>Order on DoorDash</h4><p>Fast local delivery available via DoorDash now.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="menu">
+  <div class="menu-header">
+    <div>
+      <div class="section-label">Our Menu</div>
+      <h2 class="section-title">Signature <em>Guinean Dishes</em></h2>
+    </div>
+    <div class="menu-filters">
+      <button class="filter-btn active" onclick="filterMenu('all',this)">All</button>
+      <button class="filter-btn" onclick="filterMenu('special',this)">⭐ Special</button>
+      <button class="filter-btn" onclick="filterMenu('grill',this)">From the Grill</button>
+      <button class="filter-btn" onclick="filterMenu('fryer',this)">From the Fryer</button>
+      <button class="filter-btn" onclick="filterMenu('sauces',this)">Sauces</button>
+      <button class="filter-btn" onclick="filterMenu('stew',this)">Stews</button>
+      <button class="filter-btn" onclick="filterMenu('drinks',this)">Drinks</button>
+    </div>
+  </div>
+  <div class="menu-grid" id="menuGrid"></div>
+</section>
 
 
 
-	•	OUR STORY
-	•	MENU
-	•	REVIEWS
-	•	
-	•	
-	•	
-	•	🛵 ORDER NOW
+<section id="reviews">
+  <div style="text-align:center;margin-bottom:3rem">
+    <div class="section-label" style="justify-content:center">Google Reviews</div>
+    <h2 class="section-title">What Our <em>Community</em> Says</h2>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="google-badge"><div class="google-g">G</div> Google Review</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Ok so, I recently tried this place — honestly they can cook for real!! The portion is fair enough to fill you up until the next day!"</p>
+      <div class="reviewer"><div class="reviewer-avatar">ML</div><div><div class="reviewer-name">Mariam L.</div><div class="reviewer-loc">Philadelphia, PA</div></div></div>
+    </div>
+    <div class="review-card">
+      <div class="google-badge"><div class="google-g">G</div> Google Review</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Husband and I decided to try Djoliba and the food was delicious, service wonderful! We had the lamb and jollof. The sautéed onions over the jollof is amazing. I'm so glad I found this place!"</p>
+      <div class="reviewer"><div class="reviewer-avatar">SC</div><div><div class="reviewer-name">Sarah C.</div><div class="reviewer-loc">Philadelphia, PA</div></div></div>
+    </div>
+    <div class="review-card">
+      <div class="google-badge"><div class="google-g">G</div> Google Review</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Had jollof rice with tilapia and food and service was a 10/10. I will definitely be coming back."</p>
+      <div class="reviewer"><div class="reviewer-avatar">KA</div><div><div class="reviewer-name">Kofi A.</div><div class="reviewer-loc">West Philadelphia, PA</div></div></div>
+    </div>
+    <div class="review-card">
+      <div class="google-badge"><div class="google-g">G</div> Google Review</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Had the lamb shank (gigot) with rice. The portion was generous and the food delicious. The entire staff was very attentive. I would eat here again."</p>
+      <div class="reviewer"><div class="reviewer-avatar">PD</div><div><div class="reviewer-name">Pierre D.</div><div class="reviewer-loc">South Philadelphia, PA</div></div></div>
+    </div>
+    <div class="review-card">
+      <div class="google-badge"><div class="google-g">G</div> Google Review</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"I eat at Djoliba often, and the food is consistently delicious. They have a hibiscus slushy that tastes lovely. The fresh ginger drink always hits the spot."</p>
+      <div class="reviewer"><div class="reviewer-avatar">TS</div><div><div class="reviewer-name">Tamba S.</div><div class="reviewer-loc">Upper Darby, PA</div></div></div>
+    </div>
+    <div class="review-card">
+      <div class="google-badge"><div class="google-g">G</div> Google Review</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"When I tell you this meal was so good! I got an entire platter with chicken, rice, veggies, and sweet plantains for just over $20. The establishment felt like home and the workers were so lovely."</p>
+      <div class="reviewer"><div class="reviewer-avatar">NB</div><div><div class="reviewer-name">Nadia B.</div><div class="reviewer-loc">Philadelphia, PA</div></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="info-band">
+  <div class="info-item"><h3>📍 Location</h3><p>6735 Elmwood Ave<br>Philadelphia, PA 19142</p></div>
+  <div class="info-item"><h3>🕐 Hours</h3><p>Open Every Day<br>11am – 10pm</p></div>
+  <div class="info-item"><h3>📞 Contact</h3><p><a href="tel:2154920979">(215) 492-0979</a><br>Call or WhatsApp</p></div>
+  <div class="info-item"><h3>🛵 Order Online</h3><p><a href="https://www.doordash.com/store/djoliba-philadelphia-31716157/" target="_blank">🚗 DoorDash →</a><br><a href="https://www.ubereats.com/store/djoliba-6735-elmwood-avenue/uOYLNBFFW3WuG21foNTmFw" target="_blank">🚲 Uber Eats →</a></p></div>
+</div>
 
 
-🇬🇳 AUTHENTIC GUINEAN CUISINE · 6735 ELMWOOD AVE, PHILADELPHIA PA
-DJOLIBA
-The taste of Guinea — right here in Philadelphia
-Authentic Guinean dishes made with love, tradition, and the bold spices of Conakry. From Poulet DG to Riz Gras, Soupe Kandia to Gigot d'Agneau — every plate is a journey home.
-🚗 DOORDASH 🚲 UBER EATS
-VIEW MENU
-100%
-HALAL CERTIFIED
-4.8★
-GOOGLE RATING
-🇬🇳
-PROUDLY GUINEAN
-DRIED RICE LAFIDI
-✦
-GRILLED LAMB STEAK
-✦
-DICED LAMB DIBI
-✦
-LAMB SHANK GIGOT
-✦
-GRILLED TILAPIA
-✦
-PEANUT BUTTER SOUP
-✦
-CASSAVA LEAVES TADAI
-✦
-POTATO GREENS
-✦
-FRIED SNAPPER
-✦
-SORREL BISSAP
-✦
-GINGER SLUSHY
-✦
-DRIED RICE LAFIDI
-✦
-GRILLED LAMB STEAK
-✦
-DICED LAMB DIBI
-✦
-LAMB SHANK GIGOT
-✦
-GRILLED TILAPIA
-✦
-PEANUT BUTTER SOUP
-✦
-CASSAVA LEAVES TADAI
-✦
-POTATO GREENS
-✦
-FRIED SNAPPER
-✦
-SORREL BISSAP
-✦
-GINGER SLUSHY
-✦
-￼
-￼
-￼
-🇬🇳
-GUINEAN
-CUISINE
-OUR STORY
-Guinea on a Plate
-DJOLIBA — named after the Mandinka word for the mighty Niger River — was born from a deep love of Guinean culture, community, and cuisine. We bring the authentic tastes of Conakry directly to Philadelphia at 6735 Elmwood Ave.
-Every dish we serve is made with time-honored recipes, fresh ingredients, and the spices that define Guinean cooking. Whether you grew up eating Riz Gras on Sundays or are discovering Poulet DG for the very first time — you are welcome here.
-🕌
-100% Halal
-All meats are halal certified, always.
-🌿
-Fresh Daily
-Prepared fresh every morning with quality ingredients.
-🇬🇳
-Proudly Guinean
-Authentic recipes from Guinea, served with pride.
-🚗
-Order on DoorDash
-Fast local delivery available via DoorDash now.
-OUR MENU
-Signature Guinean Dishes
-All
-⭐ Special
-From the Grill
-From the Fryer
-Sauces
-Stews
-Drinks
-GOOGLE REVIEWS
-What Our Community Says
-G Google Review
-★★★★★
-"Ok so, I recently tried this place — honestly they can cook for real!! The portion is fair enough to fill you up until the next day!"
-ML
-Mariam L.
-Philadelphia, PA
-G Google Review
-★★★★★
-"Husband and I decided to try Djoliba and the food was delicious, service wonderful! We had the lamb and jollof. The sautéed onions over the jollof is amazing. I'm so glad I found this place!"
-SC
-Sarah C.
-Philadelphia, PA
-G Google Review
-★★★★★
-"Had jollof rice with tilapia and food and service was a 10/10. I will definitely be coming back."
-KA
-Kofi A.
-West Philadelphia, PA
-G Google Review
-★★★★★
-"Had the lamb shank (gigot) with rice. The portion was generous and the food delicious. The entire staff was very attentive. I would eat here again."
-PD
-Pierre D.
-South Philadelphia, PA
-G Google Review
-★★★★★
-"I eat at Djoliba often, and the food is consistently delicious. They have a hibiscus slushy that tastes lovely. The fresh ginger drink always hits the spot."
-TS
-Tamba S.
-Upper Darby, PA
-G Google Review
-★★★★★
-"When I tell you this meal was so good! I got an entire platter with chicken, rice, veggies, and sweet plantains for just over $20. The establishment felt like home and the workers were so lovely."
-NB
-Nadia B.
-Philadelphia, PA
-📍 Location
-6735 Elmwood Ave Philadelphia, PA 19142
-🕐 Hours
-Open Every Day 11am – 10pm
-📞 Contact
-(215) 492-0979 Call or WhatsApp
-🛵 Order Online
-🚗 DoorDash → 🚲 Uber Eats →
-OUR GALLERY
-A Taste of DJOLIBA
-￼
-OUR SPREADS
-￼
-JOLLOF & FISH
-￼
-FRESH PLATES
-￼
-SIGNATURE
-￼
-CHEF'S SPECIAL
-￼
-OUR SPACE
-🚗 ORDER ON DOORDASH 🚲 ORDER ON UBER EATS
-DJOLIBA 🇬🇳
-Authentic Guinean cuisine served with pride at 6735 Elmwood Ave, Philadelphia PA. Named after the mighty Niger River — a symbol of life, culture, and community.
-QUICK LINKS
-	•	Our Story
-	•	Menu
-	•	Order Online
-	•	Reviews
-SERVICES
-	•	Dine-In
-	•	Takeout
-	•	DoorDash Delivery
-	•	Catering
-	•	Private Events
-LEGAL
-	•	Privacy Policy
-	•	Terms of Service
-	•	Refund Policy
-	•	Halal Certification
-	•	Allergy Information
-© 2025 DJOLIBA Restaurant · 6735 Elmwood Ave, Philadelphia, PA 19142 · (215) 492-0979
-📸 📱 🚗 🚲
+<!-- PHOTO GALLERY -->
+<section id="gallery" style="padding:80px 5%;background:#D0EDE0;">
+  <div style="text-align:center;margin-bottom:3rem">
+    <div class="section-label" style="justify-content:center">Our Gallery</div>
+    <h2 class="section-title">A Taste of <em>DJOLIBA</em></h2>
+  </div>
+
+  <!-- Masonry-style gallery grid -->
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:auto;gap:12px;max-width:1200px;margin:0 auto;">
+
+    <!-- Large top-left -->
+    <div style="grid-column:1/3;grid-row:1/2;border-radius:12px;overflow:hidden;height:320px;position:relative;box-shadow:0 8px 30px rgba(0,0,0,0.15)">
+      <img src="https://raw.githubusercontent.com/djolibarestaurant/djoliba-website/main/IMG_5631.jpeg" alt="Djoliba food spread" style="width:100%;height:100%;object-fit:cover;transition:transform .5s">
+      <div style="position:absolute;bottom:12px;left:12px;background:rgba(0,0,0,0.6);backdrop-filter:blur(6px);color:#FFD166;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:3px">Our Spreads</div>
+    </div>
+
+    <!-- Top right 1 -->
+    <div style="grid-column:3/4;grid-row:1/2;border-radius:12px;overflow:hidden;height:320px;position:relative;box-shadow:0 8px 30px rgba(0,0,0,0.15)">
+      <img src="https://raw.githubusercontent.com/djolibarestaurant/djoliba-website/main/IMG_5636.jpeg" alt="Jollof & Fried Fish" style="width:100%;height:100%;object-fit:cover;transition:transform .5s">
+      <div style="position:absolute;bottom:12px;left:12px;background:rgba(0,0,0,0.6);backdrop-filter:blur(6px);color:#FFD166;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:3px">Jollof & Fish</div>
+    </div>
+
+    <!-- Top right 2 -->
+    <div style="grid-column:4/5;grid-row:1/2;border-radius:12px;overflow:hidden;height:320px;position:relative;box-shadow:0 8px 30px rgba(0,0,0,0.15)">
+      <img src="https://raw.githubusercontent.com/djolibarestaurant/djoliba-website/main/IMG_4889.jpeg" alt="Djoliba dish" style="width:100%;height:100%;object-fit:cover;transition:transform .5s">
+      <div style="position:absolute;bottom:12px;left:12px;background:rgba(0,0,0,0.6);backdrop-filter:blur(6px);color:#FFD166;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:3px">Fresh Plates</div>
+    </div>
+
+    <!-- Bottom left 1 -->
+    <div style="grid-column:1/2;grid-row:2/3;border-radius:12px;overflow:hidden;height:260px;position:relative;box-shadow:0 8px 30px rgba(0,0,0,0.15)">
+      <img src="https://raw.githubusercontent.com/djolibarestaurant/djoliba-website/main/IMG_5392.jpeg" alt="Djoliba food" style="width:100%;height:100%;object-fit:cover;transition:transform .5s">
+      <div style="position:absolute;bottom:12px;left:12px;background:rgba(0,0,0,0.6);backdrop-filter:blur(6px);color:#FFD166;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:3px">Signature</div>
+    </div>
+
+    <!-- Bottom middle large -->
+    <div style="grid-column:2/4;grid-row:2/3;border-radius:12px;overflow:hidden;height:260px;position:relative;box-shadow:0 8px 30px rgba(0,0,0,0.15)">
+      <img src="https://raw.githubusercontent.com/djolibarestaurant/djoliba-website/main/IMG_5988.jpeg" alt="Djoliba special" style="width:100%;height:100%;object-fit:cover;transition:transform .5s">
+      <div style="position:absolute;bottom:12px;left:12px;background:rgba(0,0,0,0.6);backdrop-filter:blur(6px);color:#FFD166;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:3px">Chef's Special</div>
+    </div>
+
+    <!-- Bottom right - interior -->
+    <div style="grid-column:4/5;grid-row:2/3;border-radius:12px;overflow:hidden;height:260px;position:relative;box-shadow:0 8px 30px rgba(0,0,0,0.15)">
+      <img src="https://raw.githubusercontent.com/djolibarestaurant/djoliba-website/main/IMG_6316.jpeg" alt="Djoliba interior" style="width:100%;height:100%;object-fit:cover;transition:transform .5s">
+      <div style="position:absolute;bottom:12px;left:12px;background:rgba(0,0,0,0.6);backdrop-filter:blur(6px);color:#FFD166;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:3px">Our Space</div>
+    </div>
+
+  </div>
+
+  <!-- CTA under gallery -->
+  <div style="text-align:center;margin-top:2.5rem">
+    <a href="https://www.doordash.com/store/djoliba-philadelphia-31716157/" target="_blank" 
+       style="display:inline-flex;align-items:center;gap:8px;background:#C5192D;color:white;padding:.9rem 2rem;border-radius:6px;text-decoration:none;font-weight:700;font-size:.9rem;letter-spacing:.08em;text-transform:uppercase;margin-right:.8rem;transition:all .2s">
+      🚗 Order on DoorDash
+    </a>
+    <a href="https://www.ubereats.com/store/djoliba-6735-elmwood-avenue/uOYLNBFFW3WuG21foNTmFw" target="_blank"
+       style="display:inline-flex;align-items:center;gap:8px;background:#06C167;color:white;padding:.9rem 2rem;border-radius:6px;text-decoration:none;font-weight:700;font-size:.9rem;letter-spacing:.08em;text-transform:uppercase;transition:all .2s">
+      🚲 Order on Uber Eats
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo">DJOLIBA 🇬🇳</div>
+      <p>Authentic Guinean cuisine served with pride at 6735 Elmwood Ave, Philadelphia PA. Named after the mighty Niger River — a symbol of life, culture, and community.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul><li><a href="#about">Our Story</a></li><li><a href="#menu">Menu</a></li><li><a href="#order">Order Online</a></li><li><a href="#reviews">Reviews</a></li></ul>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul><li><a href="#">Dine-In</a></li><li><a href="#">Takeout</a></li><li><a href="https://www.doordash.com/store/djoliba-philadelphia-31716157/" target="_blank">DoorDash Delivery</a></li><li><a href="#order">Catering</a></li><li><a href="#">Private Events</a></li></ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li><li><a href="#">Refund Policy</a></li><li><a href="#">Halal Certification</a></li><li><a href="#">Allergy Information</a></li></ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p onclick="secretAdminTrigger()" style="cursor:default">© 2025 DJOLIBA Restaurant · 6735 Elmwood Ave, Philadelphia, PA 19142 · <a href="tel:2154920979">(215) 492-0979</a></p>
+    <div class="social-links">
+      <a href="https://www.instagram.com/djolibarestaurantphilly/" target="_blank" class="social-link" title="Instagram">📸</a>
+      <a href="https://www.tiktok.com/@djolibarestaurantphilly" target="_blank" class="social-link" title="TikTok">📱</a>
+      <a href="https://www.doordash.com/store/djoliba-philadelphia-31716157/" target="_blank" class="social-link" title="DoorDash">🚗</a>
+      <a href="https://www.ubereats.com/store/djoliba-6735-elmwood-avenue/uOYLNBFFW3WuG21foNTmFw" target="_blank" class="social-link" title="Uber Eats">🚲</a>
+    </div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="successModal">
+  <div class="modal-box">
+    <div class="modal-icon">🎉</div>
+    <h3>Order Placed!</h3>
+    <p>Thank you! Your order has been received. We will confirm shortly via phone or email.<br><br>Questions? Call us at <a href="tel:2154920979" style="color:var(--gold)">(215) 492-0979</a></p>
+    <button class="modal-close" onclick="document.getElementById('successModal').classList.remove('show')">Close</button>
+  </div>
+</div>
+
+<script>
+// ─── SUPABASE CONFIG ──────────────────────────────────
+const SUPABASE_URL = 'https://uzuesheseparsuhbvmaz.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV6dWVzaGVzZXBhcnN1aGJ2bWF6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM4MzIxMDMsImV4cCI6MjA4OTQwODEwM30.I9KQRLxyrB9GfmOJSaR4BuALSwpFYlgBQqXzwNmUxjs';
+
+async function fetchMenuFromSupabase() {
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/menu_items?select=*&order=id.asc`, {
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`,
+        'Content-Type': 'application/json'
+      }
+    });
+    if (!res.ok) throw new Error('Failed to fetch menu');
+    const data = await res.json();
+    // Map Supabase columns to our menuItems format
+    return data.map(item => ({
+      id: item.id,
+      name: item.name,
+      price: parseFloat(item.price),
+      desc: item.description,
+      category: item.category,
+      img: item.image_url,
+      tag: item.tag,
+      tagClass: item.tag_class
+    }));
+  } catch(err) {
+    console.error('Supabase error:', err);
+    return localMenuItems; // fallback to local
+  }
+}
+
+async function saveMenuToSupabase(items) {
+  try {
+    // Delete all existing items
+    await fetch(`${SUPABASE_URL}/rest/v1/menu_items?id=gte.0`, {
+      method: 'DELETE',
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      }
+    });
+    // Insert updated items
+    const payload = items.map(item => ({
+      name: item.name,
+      price: item.price,
+      description: item.desc,
+      category: item.category,
+      image_url: item.img,
+      tag: item.tag,
+      tag_class: item.tagClass
+    }));
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/menu_items`, {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify(payload)
+    });
+    return res.ok;
+  } catch(err) {
+    console.error('Save error:', err);
+    return false;
+  }
+}
+
+// Local fallback menu in case Supabase is unreachable
+const localMenuItems = [
+  // SPECIAL
+  {id:1,name:"Dried Rice (Lafidi)",category:"special",price:23.00,desc:"Authentic flavored rice with traditional okra sauce — a true Guinean specialty you won't find anywhere else.",tag:"Special",tagClass:"special",img:"https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&auto=format&fit=crop"},
+
+  // FROM THE GRILL
+  {id:2,name:"Diced Lamb (Dibi / Suya)",category:"grill",price:29.00,desc:"Seasoned lamb cubes with a bold blend of aromatic spices, grilled to perfection.",tag:"Popular",tagClass:"",img:"https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&auto=format&fit=crop"},
+  {id:3,name:"Grilled Lamb Steak",category:"grill",price:29.00,desc:"Tender lamb steak pieces grilled to perfection. Our #1 most liked dish!",tag:"#1 Liked",tagClass:"special",img:"https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=600&auto=format&fit=crop"},
+  {id:4,name:"Grilled Tilapia Fish",category:"grill",price:23.00,desc:"Fresh whole tilapia fish seasoned to perfection and expertly fire-grilled for a smoky, flavorful finish.",tag:"Halal",tagClass:"halal",img:"https://github.com/djolibarestaurant/djoliba-website/blob/main/IMG_5636.jpeg?raw=true"},
+  {id:5,name:"Grilled Chicken Pieces",category:"grill",price:23.00,desc:"Tender chicken pieces seasoned with Guinean spices and grilled to perfection.",tag:"Halal",tagClass:"halal",img:"https://images.unsplash.com/photo-1547592180-85f173990554?w=600&auto=format&fit=crop"},
+  {id:6,name:"Grilled Snapper Fish",category:"grill",price:40.50,desc:"Fresh whole snapper fish garnished with aromatic herbs and a hint of citrus.",tag:"Popular",tagClass:"",img:"https://images.unsplash.com/photo-1519984388953-d2406bc725e1?w=600&auto=format&fit=crop"},
+  {id:7,name:"Lamb Shank (Gigot)",category:"grill",price:23.00,desc:"Tender lamb shank seasoned with fresh herbs and spices — a beloved Djoliba classic.",tag:"Halal",tagClass:"halal",img:"https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&auto=format&fit=crop"},
+
+  // FROM THE FRYER
+  {id:8,name:"Fried Tilapia Fish",category:"fryer",price:23.00,desc:"Crispy whole tilapia fish, golden-fried to perfection inside and out.",tag:"Popular",tagClass:"",img:"https://github.com/djolibarestaurant/djoliba-website/blob/main/IMG_5636.jpeg?raw=true"},
+  {id:9,name:"Fried Whole Snapper",category:"fryer",price:40.50,desc:"Crispy whole snapper — golden on the outside, tender and flaky on the inside.",tag:"Halal",tagClass:"halal",img:"https://images.unsplash.com/photo-1519984388953-d2406bc725e1?w=600&auto=format&fit=crop"},
+  {id:10,name:"Fried Croaker Fish",category:"fryer",price:34.50,desc:"Golden-fried croaker fish with a crispy exterior and tender, flaky interior.",tag:"Halal",tagClass:"halal",img:"https://images.unsplash.com/photo-1519984388953-d2406bc725e1?w=600&auto=format&fit=crop"},
+
+  // FROM THE POT (SAUCES)
+  {id:11,name:"Potato Greens",category:"sauces",price:17.50,desc:"Potato greens with choice of chicken or beef, served over white or brown rice.",tag:"Halal",tagClass:"halal",img:"https://images.unsplash.com/photo-1574484284002-952d92456975?w=600&auto=format&fit=crop"},
+  {id:12,name:"Peanut Butter Soup (Kanciye)",category:"sauces",price:17.50,desc:"Creamy peanut-based soup with choice of chicken or beef, served with white or brown rice.",tag:"Signature",tagClass:"special",img:"https://images.unsplash.com/photo-1567521464027-f127ff144326?w=600&auto=format&fit=crop"},
+  {id:13,name:"Cassava Leaves (Tadai)",category:"sauces",price:17.50,desc:"Tender cassava leaves with choice of chicken or beef, served with white or brown rice.",tag:"Halal",tagClass:"halal",img:"https://images.unsplash.com/photo-1574484284002-952d92456975?w=600&auto=format&fit=crop"},
+  {id:14,name:"Fried Onion Sauce (Maganyi)",category:"sauces",price:17.50,desc:"Fried onion sauce with choice of chicken or beef, served with white or brown rice.",tag:"Halal",tagClass:"halal",img:"https://images.unsplash.com/photo-1574484284002-952d92456975?w=600&auto=format&fit=crop"},
+  {id:15,name:"Tomato Soup (Nagui)",category:"sauces",price:17.50,desc:"Served with choice of chicken or beef, and white or brown rice.",tag:"Halal",tagClass:"halal",img:"https://images.unsplash.com/photo-1574484284002-952d92456975?w=600&auto=format&fit=crop"},
+  {id:16,name:"Fried Okra Soup",category:"sauces",price:17.50,desc:"Okra soup with your choice of chicken or beef, paired with white or brown rice.",tag:"Popular",tagClass:"",img:"https://images.unsplash.com/photo-1574484284002-952d92456975?w=600&auto=format&fit=crop"},
+  {id:17,name:"Light Soup with Okra",category:"sauces",price:12.00,desc:"A light, flavorful okra soup — perfect for a satisfying and wholesome meal.",tag:"Halal",tagClass:"halal",img:"https://images.unsplash.com/photo-1574484284002-952d92456975?w=600&auto=format&fit=crop"},
+
+  // FROM THE POT (STEW)
+  {id:18,name:"Pepper Soup (Bouillon)",category:"stew",price:12.00,desc:"Traditional Guinean pepper soup — bold, aromatic, and deeply warming.",tag:"Halal",tagClass:"halal",img:"https://images.unsplash.com/photo-1574484284002-952d92456975?w=600&auto=format&fit=crop"},
+
+  // DRINKS
+  {id:19,name:"Sorrel / Bissap",category:"drinks",price:4.00,desc:"A refreshing hibiscus drink, commonly known as sorrel or bissap. Naturally sweet and floral.",tag:"Vegan",tagClass:"special",img:"https://images.unsplash.com/photo-1544145945-f90425340c7e?w=600&auto=format&fit=crop"},
+  {id:20,name:"Ginger Slushy",category:"drinks",price:7.00,desc:"Fresh homemade ginger slushy — bold, spicy, and ice-cold refreshing. A Djoliba favorite!",tag:"Popular",tagClass:"",img:"https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=600&auto=format&fit=crop"},
+];
+
+let menuItems=[],currentFilter='all';
+
+function renderMenu(){
+  const g=document.getElementById('menuGrid');
+  const f=currentFilter==='all'?menuItems:menuItems.filter(i=>i.category===currentFilter);
+  g.innerHTML=f.map(item=>`<div class="menu-item"><div class="menu-item-img"><img src="${item.img}" alt="${item.name}" loading="lazy"><span class="menu-tag ${item.tagClass}">${item.tag}</span></div><div class="menu-item-body"><div class="menu-item-name">${item.name}</div><div class="menu-item-desc">${item.desc}</div><div class="menu-item-footer"><span class="menu-price">$${item.price.toFixed(2)}</span><div style="display:flex;gap:6px"><a href="https://www.doordash.com/store/djoliba-philadelphia-31716157/" target="_blank" class="order-dd-btn" style="background:var(--red)">DoorDash</a><a href="https://www.ubereats.com/store/djoliba-6735-elmwood-avenue/uOYLNBFFW3WuG21foNTmFw" target="_blank" class="order-dd-btn" style="background:#06C167">Uber Eats</a></div></div></div></div>`).join('');
+}
+
+function filterMenu(cat,btn){
+  currentFilter=cat;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderMenu();
+}
+
+function addToCart(id){
+  const item=menuItems.find(i=>i.id===id);
+  const ex=cart.find(c=>c.id===id);
+  if(ex)ex.qty++;else cart.push({...item,qty:1});
+  renderCart();
+}
+
+function updateQty(id,delta){
+  const idx=cart.findIndex(c=>c.id===id);
+  if(idx===-1)return;
+  cart[idx].qty+=delta;
+  if(cart[idx].qty<=0)cart.splice(idx,1);
+  renderCart();
+}
+
+function renderCart(){
+  const ce=document.getElementById('cartEmpty'),ci=document.getElementById('cartItems'),cs=document.getElementById('cartSummary'),cc=document.getElementById('cartCount');
+  const total = cart.reduce((a,c)=>a+c.qty,0);
+  cc.textContent=total;
+  const fab=document.getElementById('fabCount');
+  if(fab) fab.textContent=total;
+  if(cart.length===0){ce.style.display='block';ci.innerHTML='';cs.style.display='none';return;}
+  ce.style.display='none';cs.style.display='block';
+  ci.innerHTML=cart.map(item=>`<div class="cart-item"><span class="cart-item-name">${item.name}</span><div class="cart-item-controls"><button onclick="updateQty(${item.id},-1)">−</button><span class="cart-item-qty">${item.qty}</span><button onclick="updateQty(${item.id},1)">+</button></div><span class="cart-item-price">$${(item.price*item.qty).toFixed(2)}</span></div>`).join('');
+  const sub=cart.reduce((a,c)=>a+c.price*c.qty,0),tax=sub*.08,del=orderType==='delivery'?3.99:0,tot=sub+tax+del;
+  document.getElementById('subtotal').textContent='$'+sub.toFixed(2);
+  document.getElementById('tax').textContent='$'+tax.toFixed(2);
+  document.getElementById('total').textContent='$'+tot.toFixed(2);
+  document.getElementById('deliveryFeeRow').style.display=orderType==='delivery'?'flex':'none';
+}
+
+function setOrderType(type,btn){
+  orderType=type;
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('deliveryAddressGroup').style.display=type==='delivery'?'flex':'none';
+  renderCart();
+}
+
+function selectPay(el){document.querySelectorAll('.pay-option').forEach(p=>p.classList.remove('active'));el.classList.add('active');}
+
+function submitOrder(){
+  const fn=document.getElementById('firstName').value.trim(),ln=document.getElementById('lastName').value.trim(),ph=document.getElementById('phone').value.trim(),em=document.getElementById('email').value.trim(),t=document.getElementById('terms').checked,a=document.getElementById('accuracy').checked;
+  if(!fn||!ln||!ph||!em){alert('Please fill in all required fields (Name, Phone, Email).');return;}
+  if(!t||!a){alert('Please agree to the required compliance checkboxes to proceed.');return;}
+  if(cart.length===0){alert('Your cart is empty. Please add items before ordering.');return;}
+  document.getElementById('successModal').classList.add('show');
+  cart=[];renderCart();
+  ['firstName','lastName','phone','email','notes'].forEach(id=>document.getElementById(id).value='');
+  ['terms','accuracy','refund','marketing'].forEach(id=>document.getElementById(id).checked=false);
+}
+
+// ── SITE CONTENT LOADER ────────────────────────
+async function loadSiteContent() {
+  try {
+    const res = await fetch(`https://uzuesheseparsuhbvmaz.supabase.co/rest/v1/site_content?select=*`, {
+      headers: {
+        'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV6dWVzaGVzZXBhcnN1aGJ2bWF6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM4MzIxMDMsImV4cCI6MjA4OTQwODEwM30.I9KQRLxyrB9GfmOJSaR4BuALSwpFYlgBQqXzwNmUxjs',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV6dWVzaGVzZXBhcnN1aGJ2bWF6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM4MzIxMDMsImV4cCI6MjA4OTQwODEwM30.I9KQRLxyrB9GfmOJSaR4BuALSwpFYlgBQqXzwNmUxjs'
+      }
+    });
+    if (!res.ok) return;
+    const data = await res.json();
+    if (!data.length) return;
+
+    const c = {};
+    data.forEach(row => c[row.key] = row.value);
+
+    // Hero section
+    if (c.heroBadge) {
+      const badge = document.querySelector('.hero-badge');
+      if (badge) badge.innerHTML = c.heroBadge;
+    }
+    if (c.heroSubtitle) {
+      const sub = document.querySelector('.hero-subtitle');
+      if (sub) sub.textContent = c.heroSubtitle;
+    }
+    if (c.heroDesc) {
+      const desc = document.querySelector('.hero-desc');
+      if (desc) desc.textContent = c.heroDesc;
+    }
+
+    // Hero images
+    const heroImgs = document.querySelectorAll('.food-card-img img');
+    const heroLabels = document.querySelectorAll('.food-card-label');
+    if (c.hero1Url && heroImgs[0]) { heroImgs[0].src = c.hero1Url; }
+    if (c.hero1Label && heroLabels[0]) { heroLabels[0].textContent = c.hero1Label; }
+    if (c.hero2Url && heroImgs[1]) { heroImgs[1].src = c.hero2Url; }
+    if (c.hero2Label && heroLabels[1]) { heroLabels[1].textContent = c.hero2Label; }
+    if (c.hero3Url && heroImgs[2]) { heroImgs[2].src = c.hero3Url; }
+    if (c.hero3Label && heroLabels[2]) { heroLabels[2].textContent = c.hero3Label; }
+
+    // About section
+    if (c.aboutTitle) {
+      const title = document.querySelector('#about .section-title');
+      if (title) title.innerHTML = c.aboutTitle.replace('on a ', 'on a <em>') + '</em>';
+    }
+    const aboutPs = document.querySelectorAll('.about-text p');
+    if (c.aboutP1 && aboutPs[0]) aboutPs[0].textContent = c.aboutP1;
+    if (c.aboutP2 && aboutPs[1]) aboutPs[1].textContent = c.aboutP2;
+
+    // About images
+    const collageImgs = document.querySelectorAll('.interior-collage img');
+    if (c.about1Url && collageImgs[0]) collageImgs[0].src = c.about1Url;
+    if (c.about2Url && collageImgs[1]) collageImgs[1].src = c.about2Url;
+    if (c.about3Url && collageImgs[2]) collageImgs[2].src = c.about3Url;
+
+  } catch(e) {
+    console.log('Content load error:', e);
+  }
+}
+
+// Load menu from Supabase on page load
+async function init() {
+  const items = await fetchMenuFromSupabase();
+  if (items && items.length > 0) {
+    menuItems.length = 0;
+    items.forEach(i => menuItems.push(i));
+  }
+  renderMenu();
+  await loadSiteContent();
+}
+init();
+
+// ─── MOBILE MENU ──────────────────────────────────────
+function toggleMobileMenu() {
+  const nav = document.getElementById('navLinks');
+  const btn = document.getElementById('hamburgerBtn');
+  nav.classList.toggle('mobile-open');
+  btn.classList.toggle('open');
+}
+
+// Close mobile menu when a link is clicked
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('#navLinks a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById('navLinks').classList.remove('mobile-open');
+      document.getElementById('hamburgerBtn').classList.remove('open');
+    });
+  });
+});
+
+// ─── ADMIN PANEL ───────────────────────────────────────
+const ADMIN_PASSWORD = 'Djene@804$!!!';
+
+function openAdminLogin() {
+  document.getElementById('adminLoginModal').classList.add('show');
+}
+
+function adminLogin() {
+  const pw = document.getElementById('adminPwInput').value;
+  if (pw === ADMIN_PASSWORD) {
+    document.getElementById('adminLoginModal').classList.remove('show');
+    document.getElementById('adminPwInput').value = '';
+    document.getElementById('adminLoginError').style.display = 'none';
+    openAdminPanel();
+  } else {
+    document.getElementById('adminLoginError').style.display = 'block';
+  }
+}
+
+function openAdminPanel() {
+  renderAdminItems();
+  document.getElementById('adminPanel').classList.add('show');
+}
+
+function closeAdmin() {
+  document.getElementById('adminPanel').classList.remove('show');
+}
+
+function renderAdminItems() {
+  const container = document.getElementById('adminItemsList');
+  container.innerHTML = menuItems.map((item, idx) => `
+    <div class="admin-item-row" id="adminRow${idx}">
+      <div class="admin-item-preview">
+        <img src="${item.img}" alt="${item.name}" onerror="this.src='https://via.placeholder.com/80x80/2A1A0A/F0A500?text=IMG'">
+        <span class="admin-cat-badge">${item.category}</span>
+      </div>
+      <div class="admin-item-fields">
+        <div class="admin-field-row">
+          <div class="admin-field" style="flex:2">
+            <label>Dish Name</label>
+            <input type="text" value="${item.name}" onchange="menuItems[${idx}].name=this.value" placeholder="Dish name">
+          </div>
+          <div class="admin-field admin-field-sm">
+            <label>Price ($)</label>
+            <input type="number" value="${item.price}" step="0.01" min="0" onchange="menuItems[${idx}].price=parseFloat(this.value)" placeholder="0.00">
+          </div>
+          <div class="admin-field admin-field-sm">
+            <label>Category</label>
+            <select onchange="menuItems[${idx}].category=this.value">
+              <option value="special" ${item.category==='special'?'selected':''}>Special</option>
+              <option value="grill" ${item.category==='grill'?'selected':''}>From the Grill</option>
+              <option value="fryer" ${item.category==='fryer'?'selected':''}>From the Fryer</option>
+              <option value="sauces" ${item.category==='sauces'?'selected':''}>Sauces</option>
+              <option value="stew" ${item.category==='stew'?'selected':''}>Stews</option>
+              <option value="drinks" ${item.category==='drinks'?'selected':''}>Drinks</option>
+            </select>
+          </div>
+        </div>
+        <div class="admin-field-row">
+          <div class="admin-field" style="flex:1">
+            <label>Description</label>
+            <input type="text" value="${item.desc}" onchange="menuItems[${idx}].desc=this.value" placeholder="Dish description">
+          </div>
+        </div>
+        <div class="admin-field-row">
+          <div class="admin-field" style="flex:1">
+            <label>Image URL <span style="color:#A89070;font-weight:400;text-transform:none;letter-spacing:0">(paste any web or Instagram image link)</span></label>
+            <div style="display:flex;gap:8px;align-items:center">
+              <input type="text" id="imgInput${idx}" value="${item.img}" placeholder="https://..." style="flex:1">
+              <button class="admin-img-btn" onclick="applyImage(${idx})">Apply</button>
+            </div>
+          </div>
+        </div>
+        <div class="admin-field-row">
+          <div class="admin-field admin-field-sm">
+            <label>Badge Label</label>
+            <input type="text" value="${item.tag}" onchange="menuItems[${idx}].tag=this.value" placeholder="e.g. Popular">
+          </div>
+          <div class="admin-field admin-field-sm">
+            <label>Badge Color</label>
+            <select onchange="menuItems[${idx}].tagClass=this.value">
+              <option value="" ${item.tagClass===''?'selected':''}>Red (default)</option>
+              <option value="halal" ${item.tagClass==='halal'?'selected':''}>Green (Halal)</option>
+              <option value="special" ${item.tagClass==='special'?'selected':''}>Gold (Special)</option>
+            </select>
+          </div>
+          <div class="admin-field admin-field-sm" style="justify-content:flex-end">
+            <label>&nbsp;</label>
+            <button class="admin-delete-btn" onclick="deleteItem(${idx})">🗑 Remove</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function applyImage(idx) {
+  const url = document.getElementById('imgInput'+idx).value.trim();
+  if (url) {
+    menuItems[idx].img = url;
+    const row = document.getElementById('adminRow'+idx);
+    if (row) row.querySelector('img').src = url;
+    showAdminToast('✅ Image updated for ' + menuItems[idx].name);
+  }
+}
+
+function deleteItem(idx) {
+  if (confirm('Remove "' + menuItems[idx].name + '" from the menu?')) {
+    menuItems.splice(idx, 1);
+    renderAdminItems();
+    showAdminToast('🗑 Item removed');
+  }
+}
+
+function addNewItem() {
+  menuItems.push({
+    id: Date.now(),
+    name: 'New Dish',
+    category: 'grill',
+    price: 0.00,
+    desc: 'Enter a description for this dish.',
+    tag: 'New',
+    tagClass: '',
+    img: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&auto=format&fit=crop'
+  });
+  renderAdminItems();
+  setTimeout(() => document.getElementById('adminItemsList').lastElementChild.scrollIntoView({behavior:'smooth'}), 100);
+  showAdminToast('✅ New item added — fill in the details!');
+}
+
+async function saveAndApply() {
+  showAdminToast('💾 Saving to database...');
+  const saved = await saveMenuToSupabase(menuItems);
+  if (saved) {
+    renderMenu();
+    showAdminToast('✅ Menu saved & updated!');
+    setTimeout(() => closeAdmin(), 1400);
+  } else {
+    // Try to enable RLS policy
+    showAdminToast('⚠️ Saved locally. Check Supabase RLS policy.');
+    renderMenu();
+    setTimeout(() => closeAdmin(), 2000);
+  }
+}
+
+function showAdminToast(msg) {
+  const t = document.getElementById('adminToast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+</script>
+
+<!-- ADMIN TRIGGER - hidden, triple click on footer copyright -->
+<script>
+let clickCount = 0;
+let clickTimer = null;
+function secretAdminTrigger() {
+  clickCount++;
+  if (clickTimer) clearTimeout(clickTimer);
+  clickTimer = setTimeout(() => { clickCount = 0; }, 1000);
+  if (clickCount >= 3) {
+    clickCount = 0;
+    openAdminLogin();
+  }
+}
+</script>
+
+<!-- ADMIN LOGIN MODAL -->
+<div class="modal-overlay" id="adminLoginModal">
+  <div class="modal-box" style="max-width:360px">
+    <div class="modal-icon">🔐</div>
+    <h3 style="margin-bottom:1.2rem">Admin Login</h3>
+    <input type="password" id="adminPwInput" placeholder="Enter password"
+      onkeydown="if(event.key==='Enter')adminLogin()"
+      style="width:100%;background:#1C1208;border:1px solid rgba(255,255,255,0.15);color:#1A3D2B;padding:0.85rem 1rem;border-radius:6px;font-size:1rem;font-family:Outfit,sans-serif;outline:none;margin-bottom:0.6rem;box-sizing:border-box">
+    <p id="adminLoginError" style="display:none;color:#ff6b6b;font-size:0.8rem;margin-bottom:0.8rem">❌ Incorrect password. Try again.</p>
+    <div style="display:flex;gap:0.8rem;margin-top:0.5rem">
+      <button class="modal-close" style="flex:1;background:rgba(255,255,255,0.08);color:#3D6B52"
+        onclick="document.getElementById('adminLoginModal').classList.remove('show');document.getElementById('adminPwInput').value='';document.getElementById('adminLoginError').style.display='none'">Cancel</button>
+      <button class="modal-close" style="flex:1" onclick="adminLogin()">Login →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div id="adminPanel" class="admin-overlay">
+  <div class="admin-container">
+    <div class="admin-header">
+      <div>
+        <h2>🍽️ DJOLIBA Menu Manager</h2>
+        <p>Update dish names, prices, images & categories. Click "Save & Apply" when done.</p>
+      </div>
+      <div style="display:flex;gap:0.8rem;align-items:center;flex-wrap:wrap">
+        <button class="admin-add-btn" onclick="addNewItem()">+ Add New Dish</button>
+        <button class="admin-save-btn" onclick="saveAndApply()">✅ Save & Apply</button>
+        <button class="admin-close-btn" onclick="closeAdmin()">✕ Close</button>
+      </div>
+    </div>
+    <div id="adminItemsList" class="admin-items-list"></div>
+  </div>
+  <div id="adminToast" class="admin-toast"></div>
+</div>
+
+<style>
+.admin-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.96);z-index:99999;overflow-y:auto}
+.admin-overlay.show{display:block}
+.admin-container{max-width:980px;margin:0 auto;padding:2rem 1.5rem 5rem}
+.admin-header{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid rgba(240,165,0,0.2);flex-wrap:wrap}
+.admin-header h2{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:0.1em;color:var(--gold);margin-bottom:0.3rem}
+.admin-header p{font-size:0.85rem;color:#3D6B52}
+.admin-save-btn{background:var(--gold);color:var(--dark);border:none;padding:0.7rem 1.4rem;border-radius:6px;font-weight:700;font-size:0.85rem;cursor:pointer;font-family:'Outfit',sans-serif;transition:all 0.2s}
+.admin-save-btn:hover{background:var(--gold-light)}
+.admin-add-btn{background:var(--green);color:#1A3D2B;border:none;padding:0.7rem 1.4rem;border-radius:6px;font-weight:700;font-size:0.85rem;cursor:pointer;font-family:'Outfit',sans-serif;transition:all 0.2s}
+.admin-add-btn:hover{background:var(--green-light)}
+.admin-close-btn{background:transparent;color:#3D6B52;border:1px solid rgba(255,255,255,0.15);padding:0.7rem 1.2rem;border-radius:6px;font-size:0.85rem;cursor:pointer;font-family:'Outfit',sans-serif;transition:all 0.2s}
+.admin-close-btn:hover{border-color:var(--red);color:var(--red)}
+.admin-items-list{display:flex;flex-direction:column;gap:1rem}
+.admin-item-row{background:var(--dark-warm);border:1px solid rgba(240,165,0,0.1);border-radius:10px;padding:1.2rem;display:flex;gap:1.2rem;align-items:flex-start;transition:border-color 0.2s}
+.admin-item-row:hover{border-color:rgba(240,165,0,0.25)}
+.admin-item-preview{flex-shrink:0;text-align:center}
+.admin-item-preview img{width:80px;height:80px;object-fit:cover;border-radius:8px;border:2px solid rgba(240,165,0,0.15);display:block}
+.admin-cat-badge{display:block;text-align:center;font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--gold);margin-top:5px;background:rgba(240,165,0,0.1);border-radius:3px;padding:2px 4px}
+.admin-item-fields{flex:1;min-width:0}
+.admin-field-row{display:flex;gap:0.8rem;margin-bottom:0.7rem;flex-wrap:wrap}
+.admin-field{display:flex;flex-direction:column;gap:4px;min-width:120px}
+.admin-field-sm{min-width:100px;max-width:160px}
+.admin-field label{font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#3D6B52}
+.admin-field input,.admin-field select{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:#1A3D2B;padding:0.5rem 0.7rem;border-radius:5px;font-size:0.85rem;font-family:'Outfit',sans-serif;outline:none;transition:border-color 0.2s;width:100%;box-sizing:border-box}
+.admin-field input:focus,.admin-field select:focus{border-color:var(--gold)}
+.admin-field select option{background:var(--dark-warm)}
+.admin-img-btn{background:var(--gold);color:var(--dark);border:none;padding:0.5rem 1rem;border-radius:5px;font-weight:700;font-size:0.8rem;cursor:pointer;white-space:nowrap;font-family:'Outfit',sans-serif;transition:all 0.2s;flex-shrink:0}
+.admin-img-btn:hover{background:var(--gold-light)}
+.admin-delete-btn{background:rgba(197,25,45,0.15);border:1px solid rgba(197,25,45,0.3);color:#ff6b6b;padding:0.5rem 0.8rem;border-radius:5px;font-size:0.78rem;cursor:pointer;font-family:'Outfit',sans-serif;transition:all 0.2s;white-space:nowrap;width:100%}
+.admin-delete-btn:hover{background:var(--red);color:#1A3D2B;border-color:var(--red)}
+.admin-toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(20px);background:var(--green);color:#1A3D2B;padding:0.8rem 1.8rem;border-radius:100px;font-size:0.9rem;font-weight:600;opacity:0;transition:all 0.3s;pointer-events:none;z-index:999999;white-space:nowrap}
+.admin-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* Floating cart button - all screens */
+.mobile-cart-fab{
+  display:flex;
+  position:fixed;
+  bottom:1.5rem;
+  left:1.5rem;
+  z-index:8888;
+  background:var(--gold);
+  color:var(--dark);
+  border:none;
+  padding:0.8rem 1.4rem;
+  border-radius:50px;
+  font-size:0.9rem;
+  font-weight:700;
+  font-family:'Outfit',sans-serif;
+  cursor:pointer;
+  box-shadow:0 4px 24px rgba(0,0,0,0.4);
+  align-items:center;
+  gap:10px;
+  transition:all 0.2s;
+}
+.mobile-cart-fab:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,0.5)}
+.mobile-cart-fab .fab-count{
+  background:var(--red);
+  color:#1A3D2B;
+  width:24px;height:24px;
+  border-radius:50%;
+  font-size:0.75rem;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;
+}
+@media(max-width:600px){.admin-item-row{flex-direction:column}.admin-item-preview img{width:100%;height:140px}.admin-field-sm{max-width:100%}}
+</style>
+</body>
+</html>
