@@ -736,6 +736,66 @@ function submitOrder(){
   ['terms','accuracy','refund','marketing'].forEach(id=>document.getElementById(id).checked=false);
 }
 
+// ── SITE CONTENT LOADER ────────────────────────
+async function loadSiteContent() {
+  try {
+    const res = await fetch(`https://uzuesheseparsuhbvmaz.supabase.co/rest/v1/site_content?select=*`, {
+      headers: {
+        'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV6dWVzaGVzZXBhcnN1aGJ2bWF6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM4MzIxMDMsImV4cCI6MjA4OTQwODEwM30.I9KQRLxyrB9GfmOJSaR4BuALSwpFYlgBQqXzwNmUxjs',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV6dWVzaGVzZXBhcnN1aGJ2bWF6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM4MzIxMDMsImV4cCI6MjA4OTQwODEwM30.I9KQRLxyrB9GfmOJSaR4BuALSwpFYlgBQqXzwNmUxjs'
+      }
+    });
+    if (!res.ok) return;
+    const data = await res.json();
+    if (!data.length) return;
+
+    const c = {};
+    data.forEach(row => c[row.key] = row.value);
+
+    // Hero section
+    if (c.heroBadge) {
+      const badge = document.querySelector('.hero-badge');
+      if (badge) badge.innerHTML = c.heroBadge;
+    }
+    if (c.heroSubtitle) {
+      const sub = document.querySelector('.hero-subtitle');
+      if (sub) sub.textContent = c.heroSubtitle;
+    }
+    if (c.heroDesc) {
+      const desc = document.querySelector('.hero-desc');
+      if (desc) desc.textContent = c.heroDesc;
+    }
+
+    // Hero images
+    const heroImgs = document.querySelectorAll('.food-card-img img');
+    const heroLabels = document.querySelectorAll('.food-card-label');
+    if (c.hero1Url && heroImgs[0]) { heroImgs[0].src = c.hero1Url; }
+    if (c.hero1Label && heroLabels[0]) { heroLabels[0].textContent = c.hero1Label; }
+    if (c.hero2Url && heroImgs[1]) { heroImgs[1].src = c.hero2Url; }
+    if (c.hero2Label && heroLabels[1]) { heroLabels[1].textContent = c.hero2Label; }
+    if (c.hero3Url && heroImgs[2]) { heroImgs[2].src = c.hero3Url; }
+    if (c.hero3Label && heroLabels[2]) { heroLabels[2].textContent = c.hero3Label; }
+
+    // About section
+    if (c.aboutTitle) {
+      const title = document.querySelector('#about .section-title');
+      if (title) title.innerHTML = c.aboutTitle.replace('on a ', 'on a <em>') + '</em>';
+    }
+    const aboutPs = document.querySelectorAll('.about-text p');
+    if (c.aboutP1 && aboutPs[0]) aboutPs[0].textContent = c.aboutP1;
+    if (c.aboutP2 && aboutPs[1]) aboutPs[1].textContent = c.aboutP2;
+
+    // About images
+    const collageImgs = document.querySelectorAll('.interior-collage img');
+    if (c.about1Url && collageImgs[0]) collageImgs[0].src = c.about1Url;
+    if (c.about2Url && collageImgs[1]) collageImgs[1].src = c.about2Url;
+    if (c.about3Url && collageImgs[2]) collageImgs[2].src = c.about3Url;
+
+  } catch(e) {
+    console.log('Content load error:', e);
+  }
+}
+
 // Load menu from Supabase on page load
 async function init() {
   const items = await fetchMenuFromSupabase();
@@ -744,7 +804,7 @@ async function init() {
     items.forEach(i => menuItems.push(i));
   }
   renderMenu();
-  renderCart();
+  await loadSiteContent();
 }
 init();
 

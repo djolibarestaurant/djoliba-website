@@ -115,6 +115,36 @@
   .toast.error{background:var(--red);color:white}
   .toast.info{background:var(--gold);color:var(--dark)}
 
+  /* TAB NAV */
+  .tab-nav-btn{background:transparent;border:1px solid rgba(255,255,255,0.1);color:var(--muted);padding:0.5rem 1.1rem;border-radius:6px;font-size:0.82rem;font-family:'Outfit',sans-serif;cursor:pointer;transition:all 0.2s;font-weight:500}
+  .tab-nav-btn.active{background:rgba(240,165,0,0.15);border-color:var(--gold);color:var(--gold)}
+  .tab-nav-btn:hover{border-color:var(--gold);color:var(--gold)}
+
+  /* CONTENT PANEL */
+  .content-section{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.8rem;margin-bottom:1.5rem}
+  .content-section-title{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:0.1em;color:var(--gold);margin-bottom:1.2rem;padding-bottom:0.8rem;border-bottom:1px solid var(--border)}
+  .content-row{margin-bottom:1rem}
+  .content-field{display:flex;flex-direction:column;gap:6px}
+  .content-field label{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted)}
+  .content-field input,.content-field textarea{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:var(--text);padding:0.75rem 1rem;border-radius:8px;font-size:0.9rem;font-family:'Outfit',sans-serif;outline:none;transition:border-color 0.2s;width:100%}
+  .content-field input:focus,.content-field textarea:focus{border-color:var(--gold)}
+  .content-field textarea{min-height:90px;resize:vertical;line-height:1.6}
+
+  /* IMAGE GRID */
+  .content-img-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1rem}
+  .content-img-card{background:var(--dark-warm);border:1px solid var(--border);border-radius:10px;padding:1rem;display:flex;flex-direction:column;gap:8px}
+  .content-img-card label{font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted)}
+  .content-img-card input[type=text]{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:var(--text);padding:0.5rem 0.7rem;border-radius:6px;font-size:0.8rem;font-family:'Outfit',sans-serif;outline:none;transition:border-color 0.2s;width:100%}
+  .content-img-card input[type=text]:focus{border-color:var(--gold)}
+  .content-img-card input[type=file]{display:none}
+  .content-img-preview-wrap{height:130px;border-radius:8px;overflow:hidden;background:var(--dark);position:relative;margin-bottom:4px}
+  .content-img-preview-wrap img{width:100%;height:100%;object-fit:cover}
+  .content-img-placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:0.85rem;flex-direction:column;gap:4px}
+  .content-upload-btn{background:rgba(240,165,0,0.1);border:1px solid rgba(240,165,0,0.2);color:var(--gold);padding:0.45rem 0.8rem;border-radius:6px;font-size:0.75rem;font-weight:600;font-family:'Outfit',sans-serif;cursor:pointer;transition:all 0.2s;text-align:center}
+  .content-upload-btn:hover{background:rgba(240,165,0,0.2)}
+  .save-content-btn{width:100%;background:var(--gold);color:var(--dark);border:none;padding:1.1rem;border-radius:8px;font-size:1rem;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer;transition:all 0.2s;letter-spacing:0.08em;text-transform:uppercase;margin-top:0.5rem}
+  .save-content-btn:hover{background:var(--gold-light)}
+
   /* RESPONSIVE */
   @media(max-width:768px){
     .topbar{padding:0 1rem}
@@ -150,7 +180,9 @@
       <div class="topbar-badge">Menu Manager</div>
     </div>
     <div class="topbar-right">
-      <a href="https://djolibarestaurant.net" target="_blank" class="topbar-btn">🌐 View Live Site</a>
+      <button class="tab-nav-btn active" id="menuTabBtn" onclick="switchTab('menu')">🍽️ Menu</button>
+      <button class="tab-nav-btn" id="contentTabBtn" onclick="switchTab('content')">✏️ Site Content</button>
+      <a href="https://djolibarestaurant.net" target="_blank" class="topbar-btn">🌐 View Site</a>
       <button class="logout-btn" onclick="logout()">Logout</button>
     </div>
   </div>
@@ -187,6 +219,129 @@
     <!-- Menu Grid -->
     <div class="menu-grid" id="menuGrid">
       <div class="empty-state"><span>⏳</span>Loading your menu...</div>
+    </div>
+
+    <!-- SITE CONTENT PANEL -->
+    <div id="contentPanel" style="display:none">
+
+      <div class="content-section">
+        <div class="content-section-title">🦸 Hero Section</div>
+
+        <div class="content-row">
+          <div class="content-field">
+            <label>Hero Badge Text</label>
+            <input type="text" id="heroBadge" placeholder="e.g. 🇬🇳 Authentic Guinean Cuisine · Philadelphia PA">
+          </div>
+        </div>
+        <div class="content-row">
+          <div class="content-field">
+            <label>Hero Subtitle</label>
+            <input type="text" id="heroSubtitle" placeholder="e.g. The taste of Guinea — right here in Philadelphia">
+          </div>
+        </div>
+        <div class="content-row">
+          <div class="content-field">
+            <label>Hero Description</label>
+            <textarea id="heroDesc" placeholder="Short description under the title..."></textarea>
+          </div>
+        </div>
+
+        <div class="content-section-title" style="margin-top:1.5rem">Hero Images (3 cards on the right)</div>
+        <div class="content-img-grid">
+          <div class="content-img-card">
+            <div class="content-img-preview-wrap">
+              <img id="hero1Preview" src="" onerror="this.style.display='none'">
+              <div class="content-img-placeholder" id="hero1Placeholder">📸 Image 1</div>
+            </div>
+            <label>Image 1 URL or Upload</label>
+            <input type="text" id="hero1Url" placeholder="Paste URL or upload below" oninput="previewContentImg('hero1')">
+            <input type="file" accept="image/*" id="hero1File" onchange="uploadContentImg('hero1', this.files[0])">
+            <button class="content-upload-btn" onclick="document.getElementById('hero1File').click()">📸 Upload Photo</button>
+            <input type="text" id="hero1Label" placeholder="Label (e.g. Fouta Djallon)">
+          </div>
+          <div class="content-img-card">
+            <div class="content-img-preview-wrap">
+              <img id="hero2Preview" src="" onerror="this.style.display='none'">
+              <div class="content-img-placeholder" id="hero2Placeholder">📸 Image 2</div>
+            </div>
+            <label>Image 2 URL or Upload</label>
+            <input type="text" id="hero2Url" placeholder="Paste URL or upload below" oninput="previewContentImg('hero2')">
+            <input type="file" accept="image/*" id="hero2File" onchange="uploadContentImg('hero2', this.files[0])">
+            <button class="content-upload-btn" onclick="document.getElementById('hero2File').click()">📸 Upload Photo</button>
+            <input type="text" id="hero2Label" placeholder="Label (e.g. Our Food)">
+          </div>
+          <div class="content-img-card">
+            <div class="content-img-preview-wrap">
+              <img id="hero3Preview" src="" onerror="this.style.display='none'">
+              <div class="content-img-placeholder" id="hero3Placeholder">📸 Image 3</div>
+            </div>
+            <label>Image 3 URL or Upload</label>
+            <input type="text" id="hero3Url" placeholder="Paste URL or upload below" oninput="previewContentImg('hero3')">
+            <input type="file" accept="image/*" id="hero3File" onchange="uploadContentImg('hero3', this.files[0])">
+            <button class="content-upload-btn" onclick="document.getElementById('hero3File').click()">📸 Upload Photo</button>
+            <input type="text" id="hero3Label" placeholder="Label (e.g. Our Space)">
+          </div>
+        </div>
+      </div>
+
+      <div class="content-section">
+        <div class="content-section-title">📖 About Section</div>
+        <div class="content-row">
+          <div class="content-field">
+            <label>Section Title</label>
+            <input type="text" id="aboutTitle" placeholder="e.g. Guinea on a Plate">
+          </div>
+        </div>
+        <div class="content-row">
+          <div class="content-field">
+            <label>Paragraph 1</label>
+            <textarea id="aboutP1" placeholder="First paragraph of your story..."></textarea>
+          </div>
+        </div>
+        <div class="content-row">
+          <div class="content-field">
+            <label>Paragraph 2</label>
+            <textarea id="aboutP2" placeholder="Second paragraph of your story..."></textarea>
+          </div>
+        </div>
+
+        <div class="content-section-title" style="margin-top:1.5rem">About Images (collage)</div>
+        <div class="content-img-grid">
+          <div class="content-img-card">
+            <div class="content-img-preview-wrap">
+              <img id="about1Preview" src="" onerror="this.style.display='none'">
+              <div class="content-img-placeholder" id="about1Placeholder">📸 Left Image</div>
+            </div>
+            <label>Left Image (main interior)</label>
+            <input type="text" id="about1Url" placeholder="Paste URL or upload" oninput="previewContentImg('about1')">
+            <input type="file" accept="image/*" id="about1File" onchange="uploadContentImg('about1', this.files[0])">
+            <button class="content-upload-btn" onclick="document.getElementById('about1File').click()">📸 Upload Photo</button>
+          </div>
+          <div class="content-img-card">
+            <div class="content-img-preview-wrap">
+              <img id="about2Preview" src="" onerror="this.style.display='none'">
+              <div class="content-img-placeholder" id="about2Placeholder">📸 Top Right</div>
+            </div>
+            <label>Top Right Image</label>
+            <input type="text" id="about2Url" placeholder="Paste URL or upload" oninput="previewContentImg('about2')">
+            <input type="file" accept="image/*" id="about2File" onchange="uploadContentImg('about2', this.files[0])">
+            <button class="content-upload-btn" onclick="document.getElementById('about2File').click()">📸 Upload Photo</button>
+          </div>
+          <div class="content-img-card">
+            <div class="content-img-preview-wrap">
+              <img id="about3Preview" src="" onerror="this.style.display='none'">
+              <div class="content-img-placeholder" id="about3Placeholder">📸 Bottom Right</div>
+            </div>
+            <label>Bottom Right Image (food spread)</label>
+            <input type="text" id="about3Url" placeholder="Paste URL or upload" oninput="previewContentImg('about3')">
+            <input type="file" accept="image/*" id="about3File" onchange="uploadContentImg('about3', this.files[0])">
+            <button class="content-upload-btn" onclick="document.getElementById('about3File').click()">📸 Upload Photo</button>
+          </div>
+        </div>
+      </div>
+
+      <button class="save-content-btn" onclick="saveContent()">💾 Save & Apply All Changes</button>
+
     </div>
   </div>
 </div>
@@ -426,6 +581,146 @@ function updateStats() {
   document.getElementById('statGrill').textContent = menuItems.filter(i=>i.category==='grill'||i.category==='fryer').length;
   document.getElementById('statSauces').textContent = menuItems.filter(i=>i.category==='sauces'||i.category==='stew').length;
   document.getElementById('statDrinks').textContent = menuItems.filter(i=>i.category==='drinks').length;
+}
+
+// ── TABS ────────────────────────────────────────
+function switchTab(tab) {
+  const menuPanel = document.getElementById('menuGrid').parentElement;
+  const contentPanel = document.getElementById('contentPanel');
+  const actionBar = document.querySelector('.action-bar');
+  const statsBar = document.querySelector('.stats-bar');
+
+  if (tab === 'menu') {
+    document.getElementById('menuGrid').style.display = 'grid';
+    actionBar.style.display = 'flex';
+    statsBar.style.display = 'grid';
+    contentPanel.style.display = 'none';
+    document.getElementById('menuTabBtn').classList.add('active');
+    document.getElementById('contentTabBtn').classList.remove('active');
+  } else {
+    document.getElementById('menuGrid').style.display = 'none';
+    actionBar.style.display = 'none';
+    statsBar.style.display = 'none';
+    contentPanel.style.display = 'block';
+    document.getElementById('contentTabBtn').classList.add('active');
+    document.getElementById('menuTabBtn').classList.remove('active');
+    loadContentFromSupabase();
+  }
+}
+
+// ── CONTENT SUPABASE ────────────────────────────
+async function loadContentFromSupabase() {
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/site_content?select=*`, { headers });
+    if (!res.ok) {
+      // Table might not exist yet - use defaults
+      setDefaultContent();
+      return;
+    }
+    const data = await res.json();
+    if (data.length === 0) { setDefaultContent(); return; }
+    data.forEach(row => {
+      const el = document.getElementById(row.key);
+      if (el) el.value = row.value;
+      // Update previews for image fields
+      if (row.key.endsWith('Url') && row.value) {
+        const prefix = row.key.replace('Url', '');
+        previewContentImg(prefix);
+      }
+    });
+    showToast('✅ Content loaded!', 'success');
+  } catch(e) {
+    setDefaultContent();
+  }
+}
+
+function setDefaultContent() {
+  document.getElementById('heroBadge').value = '🇬🇳 Authentic Guinean Cuisine · 6735 Elmwood Ave, Philadelphia PA';
+  document.getElementById('heroSubtitle').value = 'The taste of Guinea — right here in Philadelphia';
+  document.getElementById('heroDesc').value = 'Authentic Guinean dishes made with love, tradition, and the bold spices of Conakry. From Poulet DG to Riz Gras, Soupe Kandia to Gigot d'Agneau — every plate is a journey home.';
+  document.getElementById('aboutTitle').value = 'Guinea on a Plate';
+  document.getElementById('aboutP1').value = 'DJOLIBA — named after the Mandinka word for the mighty Niger River — was born from a deep love of Guinean culture, community, and cuisine. We bring the authentic tastes of Conakry directly to Philadelphia at 6735 Elmwood Ave.';
+  document.getElementById('aboutP2').value = 'Every dish we serve is made with time-honored recipes, fresh ingredients, and the spices that define Guinean cooking. Whether you grew up eating Riz Gras on Sundays or are discovering Poulet DG for the very first time — you are welcome here.';
+  document.getElementById('hero1Url').value = 'https://images.unsplash.com/photo-1504432842672-1a79f78e4084?w=800&auto=format&fit=crop';
+  document.getElementById('hero1Label').value = 'Guinea 🇬🇳';
+  // Trigger previews
+  ['hero1','hero2','hero3','about1','about2','about3'].forEach(k => previewContentImg(k));
+}
+
+async function saveContent() {
+  showToast('💾 Saving content...', 'info');
+
+  const fields = [
+    'heroBadge','heroSubtitle','heroDesc',
+    'hero1Url','hero1Label','hero2Url','hero2Label','hero3Url','hero3Label',
+    'aboutTitle','aboutP1','aboutP2',
+    'about1Url','about2Url','about3Url'
+  ];
+
+  // First ensure table exists
+  await fetch(`${SUPABASE_URL}/rest/v1/rpc/create_site_content_if_not_exists`, {
+    method: 'POST', headers
+  }).catch(() => {});
+
+  let allOk = true;
+  for (const key of fields) {
+    const el = document.getElementById(key);
+    if (!el) continue;
+    const value = el.value;
+
+    // Try to upsert
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/site_content`, {
+      method: 'POST',
+      headers: { ...headers, 'Prefer': 'resolution=merge-duplicates' },
+      body: JSON.stringify({ key, value })
+    });
+    if (!res.ok) allOk = false;
+  }
+
+  if (allOk) {
+    showToast('✅ Content saved! Upload index.html to see changes live.', 'success');
+  } else {
+    showToast('⚠️ Some fields failed — set up site_content table first', 'error');
+  }
+}
+
+// ── CONTENT IMAGE HELPERS ────────────────────────
+function previewContentImg(prefix) {
+  const url = document.getElementById(prefix + 'Url')?.value;
+  const preview = document.getElementById(prefix + 'Preview');
+  const placeholder = document.getElementById(prefix + 'Placeholder');
+  if (preview && url) {
+    preview.src = url;
+    preview.style.display = 'block';
+    if (placeholder) placeholder.style.display = 'none';
+  }
+}
+
+async function uploadContentImg(prefix, file) {
+  if (!file) return;
+  showToast('📸 Uploading...', 'info');
+  const ext = file.name.split('.').pop();
+  const fileName = `site-${prefix}-${Date.now()}.${ext}`;
+
+  const res = await fetch(`${SUPABASE_URL}/storage/v1/object/${BUCKET}/${fileName}`, {
+    method: 'POST',
+    headers: {
+      'apikey': SUPABASE_KEY,
+      'Authorization': `Bearer ${SUPABASE_KEY}`,
+      'Content-Type': file.type,
+    },
+    body: file
+  });
+
+  if (res.ok) {
+    const url = `${SUPABASE_URL}/storage/v1/object/public/${BUCKET}/${fileName}`;
+    const urlInput = document.getElementById(prefix + 'Url');
+    if (urlInput) urlInput.value = url;
+    previewContentImg(prefix);
+    showToast('✅ Photo uploaded!', 'success');
+  } else {
+    showToast('❌ Upload failed', 'error');
+  }
 }
 
 function showToast(msg, type='success') {
