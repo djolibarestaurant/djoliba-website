@@ -24,7 +24,15 @@
   }
   ::-webkit-scrollbar{width:6px} ::-webkit-scrollbar-track{background:#E8F7F0} ::-webkit-scrollbar-thumb{background:var(--green);border-radius:3px}
 
-  .kente-strip { height:8px; background:repeating-linear-gradient(90deg,var(--red) 0px,var(--red) 20px,var(--gold) 20px,var(--gold) 40px,var(--green) 40px,var(--green) 60px,var(--gold) 60px,var(--gold) 80px); }
+  .kente-strip {
+    height: 18px;
+    background: linear-gradient(90deg,
+      #CE1126 0%, #CE1126 33.33%,
+      #FCD116 33.33%, #FCD116 66.66%,
+      #009460 66.66%, #009460 100%
+    );
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  }
 
   .guinea-flag { display:inline-flex; height:14px; border-radius:2px; overflow:hidden; vertical-align:middle; margin-left:6px; box-shadow:0 1px 4px rgba(0,0,0,.4); }
   .guinea-flag span { display:block; width:10px; height:14px; }
@@ -91,10 +99,25 @@
   .food-card-label { position:absolute; bottom:8px; left:8px; background:rgba(0,0,0,.65); backdrop-filter:blur(6px); color:var(--gold-light); font-size:.7rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase; padding:3px 8px; border-radius:2px; }
   @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
 
-  .marquee-wrap { background:var(--red-dark); overflow:hidden; padding:12px 0; border-top:1px solid rgba(240,165,0,.2); border-bottom:1px solid rgba(240,165,0,.2); }
+  .marquee-wrap {
+    background: linear-gradient(135deg, #7a000e 0%, #CE1126 40%, #a00d20 100%);
+    overflow: hidden;
+    padding: 14px 0;
+    border-top: 3px solid #FCD116;
+    border-bottom: 3px solid #009460;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.35);
+    position: relative;
+  }
+  .marquee-wrap::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(90deg, transparent 0px, transparent 60px, rgba(255,255,255,0.03) 60px, rgba(255,255,255,0.03) 61px);
+    pointer-events: none;
+  }
   .marquee-track { display:flex; width:max-content; animation:marquee 30s linear infinite; }
-  .marquee-track span { font-family:'Bebas Neue',sans-serif; font-size:1.1rem; letter-spacing:.2em; color:#FFFFFF; padding:0 2.5rem; font-weight:700; }
-  .marquee-track span.dot { color:#FFD166; padding:0; font-size:1.3rem; }
+  .marquee-track span { font-family:'Bebas Neue',sans-serif; font-size:1.25rem; letter-spacing:.25em; color:#FFFFFF; padding:0 2.5rem; font-weight:700; text-shadow: 0 1px 4px rgba(0,0,0,0.4); }
+  .marquee-track span.dot { color:#FCD116; padding:0; font-size:1.5rem; text-shadow: 0 0 8px rgba(252,209,22,0.6); }
   @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
 
   section { padding:100px 5%; }
