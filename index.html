@@ -136,6 +136,14 @@
     border-radius:12px;
     overflow:hidden;
   }
+  @keyframes kb1 { 0%{transform:scale(1)    translateX(0)    translateY(0)}    100%{transform:scale(1.12) translateX(-3%)  translateY(-2%)} }
+  @keyframes kb2 { 0%{transform:scale(1.1)  translateX(-2%)  translateY(0)}    100%{transform:scale(1)    translateX(0)    translateY(-3%)} }
+  @keyframes kb3 { 0%{transform:scale(1)    translateX(2%)   translateY(-1%)}  100%{transform:scale(1.1)  translateX(0)    translateY(2%)}  }
+  @keyframes kb4 { 0%{transform:scale(1.08) translateX(0)    translateY(-2%)}  100%{transform:scale(1)    translateX(3%)   translateY(0)}   }
+  @keyframes kb5 { 0%{transform:scale(1)    translateX(-1%)  translateY(2%)}   100%{transform:scale(1.1)  translateX(2%)   translateY(-1%)} }
+  @keyframes kb6 { 0%{transform:scale(1.1)  translateX(2%)   translateY(1%)}   100%{transform:scale(1)    translateX(-2%)  translateY(-2%)} }
+  @keyframes kb7 { 0%{transform:scale(1)    translateX(0)    translateY(-3%)}  100%{transform:scale(1.12) translateX(-2%)  translateY(1%)}  }
+
   .guinea-photo-grid .gp {
     overflow:hidden;
     position:relative;
@@ -143,10 +151,20 @@
   .guinea-photo-grid .gp img {
     width:100%; height:100%;
     object-fit:cover;
-    transition:transform .5s;
     display:block;
+    animation-duration:10s;
+    animation-timing-function:ease-in-out;
+    animation-iteration-count:infinite;
+    animation-direction:alternate;
   }
-  .guinea-photo-grid .gp:hover img { transform:scale(1.07); }
+  .guinea-photo-grid .gp:nth-child(1) img { animation-name:kb1; animation-delay:0s; }
+  .guinea-photo-grid .gp:nth-child(2) img { animation-name:kb2; animation-delay:-2s; }
+  .guinea-photo-grid .gp:nth-child(3) img { animation-name:kb3; animation-delay:-4s; }
+  .guinea-photo-grid .gp:nth-child(4) img { animation-name:kb4; animation-delay:-1s; }
+  .guinea-photo-grid .gp:nth-child(5) img { animation-name:kb5; animation-delay:-6s; }
+  .guinea-photo-grid .gp:nth-child(6) img { animation-name:kb6; animation-delay:-3s; }
+  .guinea-photo-grid .gp:nth-child(7) img { animation-name:kb7; animation-delay:-5s; }
+  .guinea-photo-grid .gp:hover img { animation-play-state:paused; transform:scale(1.07); }
   .gp-wide { grid-column: span 2; }
   .gp-tall { grid-row: span 2; }
   .about-badge { position:absolute; bottom:-16px; right:16px; background:var(--gold); color:var(--dark); padding:1.2rem 1.5rem; border-radius:8px; text-align:center; box-shadow:0 12px 40px rgba(0,0,0,.5); z-index:2; }
