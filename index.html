@@ -342,7 +342,7 @@
   #about{grid-template-columns:1fr;gap:2.5rem;padding:60px 4%}
   .guinea-photo-grid{
     grid-template-columns:1fr 1fr;
-    grid-template-rows:160px 160px 160px;
+    grid-template-rows:150px 150px 150px 150px;
   }
   /* Re-map grid areas for 2-col mobile layout */
   .guinea-photo-grid .gp-wide{grid-column:span 2}
@@ -356,10 +356,13 @@
   .filter-btn{font-size:0.72rem;padding:0.35rem 0.8rem}
   .menu-grid{grid-template-columns:1fr 1fr;gap:0.8rem}
   .menu-item-img{height:140px}
-  .menu-item-name{font-size:1rem}
-  .menu-item-desc{font-size:0.73rem}
-  .menu-price{font-size:1.2rem}
-  .order-dd-btn{font-size:0.65rem;padding:0.3rem 0.6rem}
+  .menu-item-name{font-size:0.95rem}
+  .menu-item-desc{font-size:0.72rem;line-height:1.4;margin-bottom:0.6rem}
+  .menu-item-body{padding:0.8rem}
+  .menu-item-footer{flex-direction:column;align-items:flex-start;gap:0.4rem}
+  .menu-item-footer>div{display:flex;gap:4px;width:100%}
+  .menu-price{font-size:1.1rem}
+  .order-dd-btn{flex:1;text-align:center;font-size:0.6rem;padding:0.3rem 0.3rem;white-space:nowrap}
 
   /* Order */
   #order{padding:60px 4%}
