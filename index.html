@@ -949,11 +949,9 @@ async function loadSiteContent() {
 
 // Load menu from Supabase on page load
 async function init() {
-  const items = await fetchMenuFromSupabase();
-  if (items && items.length > 0) {
-    menuItems.length = 0;
-    items.forEach(i => menuItems.push(i));
-  }
+  // Use localMenuItems as the single source of truth
+  menuItems.length = 0;
+  localMenuItems.forEach(i => menuItems.push(i));
   renderMenu();
   await loadSiteContent();
 }
