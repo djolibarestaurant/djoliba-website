@@ -29,7 +29,7 @@
     background: linear-gradient(90deg,
       #CE1126 0%, #CE1126 33.33%,
       #FCD116 33.33%, #FCD116 66.66%,
-      #F5F0E8 66.66%, #F5F0E8 100%
+      #009460 66.66%, #009460 100%
     );
     box-shadow: 0 2px 8px rgba(0,0,0,0.25);
   }
@@ -104,7 +104,7 @@
     overflow: hidden;
     padding: 14px 0;
     border-top: 3px solid #FCD116;
-    border-bottom: 3px solid #F5F0E8;
+    border-bottom: 3px solid #009460;
     box-shadow: 0 3px 12px rgba(0,0,0,0.35);
     position: relative;
   }
@@ -143,10 +143,18 @@
   .about-badge .lbl { font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; }
   .about-text p { font-size:1rem; color:var(--muted); line-height:1.85; margin-bottom:1.2rem; font-weight:300; }
   .about-features { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:2rem; }
-  .about-feat { display:flex; align-items:flex-start; gap:12px; padding:1rem; background:rgba(240,165,0,.05); border:1px solid rgba(240,165,0,.1); border-radius:6px; }
-  .about-feat-icon { font-size:1.4rem; flex-shrink:0; margin-top:2px; }
-  .about-feat h4 { font-size:.85rem; font-weight:600; color:#1A3D2B; margin-bottom:3px; }
-  .about-feat p { font-size:.78rem; color:#3D6B52; margin:0; line-height:1.5; }
+  .about-feat {
+    display:flex; align-items:flex-start; gap:14px; padding:1.2rem 1.1rem;
+    background: linear-gradient(135deg, #6B0F1A 0%, #8B1A27 60%, #5a0c15 100%);
+    border:1px solid rgba(255,200,100,.18);
+    border-radius:8px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.06);
+    transition: transform .2s, box-shadow .2s;
+  }
+  .about-feat:hover { transform:translateY(-3px); box-shadow:0 8px 28px rgba(0,0,0,0.38); }
+  .about-feat-icon { font-size:1.6rem; flex-shrink:0; margin-top:2px; filter:drop-shadow(0 2px 4px rgba(0,0,0,0.4)); }
+  .about-feat h4 { font-size:.9rem; font-weight:700; color:#FCD116; margin-bottom:4px; letter-spacing:.04em; text-transform:uppercase; }
+  .about-feat p { font-size:.78rem; color:rgba(255,255,255,0.82); margin:0; line-height:1.55; }
 
   #menu { background:#FAF7F2; }
   .menu-header { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:3rem; flex-wrap:wrap; gap:1rem; }
@@ -456,7 +464,7 @@
     <div class="hero-badge">🇬🇳 Authentic Guinean Cuisine · 6735 Elmwood Ave, Philadelphia PA</div>
     <h1 class="hero-title">DJO<span class="accent">LI</span><span class="accent-red">BA</span></h1>
     <p class="hero-subtitle">The taste of Guinea — right here in Philadelphia</p>
-    <p class="hero-desc">Authentic Guinean dishes made with love, tradition, and the bold spices of Conakry. From Poulet DG to Riz Gras, Soupe Kandia to Gigot d'Agneau — every plate is a journey home.</p>
+    <p class="hero-desc">Authentic Guinean dishes made with love, tradition, and the bold spices of Conakry. From Konkoe (Smoked Catfish) to Riz Gras, Soupe Kandia to Gigot d'Agneau — every plate is a journey home.</p>
     <div class="hero-actions">
       <a href="https://www.doordash.com/store/djoliba-philadelphia-31716157/" target="_blank" class="btn-primary">🚗 DoorDash</a>
       <a href="https://www.ubereats.com/store/djoliba-6735-elmwood-avenue/uOYLNBFFW3WuG21foNTmFw" target="_blank" class="btn-primary" style="background:var(--dark-warm);border:1px solid rgba(240,165,0,0.3);color:var(--gold)">🚲 Uber Eats</a>
@@ -503,7 +511,7 @@
     <div class="section-label">Our Story</div>
     <h2 class="section-title">Guinea on a <em>Plate</em></h2>
     <p>DJOLIBA — named after the Mandinka word for the mighty Niger River — was born from a deep love of Guinean culture, community, and cuisine. We bring the authentic tastes of Conakry directly to Philadelphia at 6735 Elmwood Ave.</p>
-    <p>Every dish we serve is made with time-honored recipes, fresh ingredients, and the spices that define Guinean cooking. Whether you grew up eating Riz Gras on Sundays or are discovering Poulet DG for the very first time — you are welcome here.</p>
+    <p>Every dish we serve is made with time-honored recipes, fresh ingredients, and the spices that define Guinean cooking. Whether you grew up eating Riz Gras on Sundays or are discovering Konkoe (our signature smoked catfish) for the very first time — you are welcome here.</p>
     <div class="about-features">
       <div class="about-feat"><span class="about-feat-icon">🕌</span><div><h4>100% Halal</h4><p>All meats are halal certified, always.</p></div></div>
       <div class="about-feat"><span class="about-feat-icon">🌿</span><div><h4>Fresh Daily</h4><p>Prepared fresh every morning with quality ingredients.</p></div></div>
