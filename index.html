@@ -168,6 +168,17 @@
   .guinea-photo-grid .gp video { width:100%; height:100%; object-fit:cover; display:block; background:#000; }
   .guinea-photo-grid .gp-video::after { content:''; position:absolute; inset:0; box-shadow:inset 0 0 0 3px var(--gold); pointer-events:none; opacity:.85; }
   .gp-wide { grid-column: span 2; }
+
+  /* Food slideshow */
+  .gp-slideshow { position:relative; overflow:hidden; }
+  .gp-slideshow img {
+    position:absolute; inset:0;
+    width:100%; height:100%; object-fit:cover;
+    opacity:0;
+    transition:opacity 0.5s ease-in-out;
+    animation:none !important; /* override Ken Burns on slideshow */
+  }
+  .gp-slideshow img.active { opacity:1; }
   .gp-tall { grid-row: span 2; }
   .about-badge { position:absolute; bottom:-16px; right:16px; background:var(--gold); color:var(--dark); padding:1.2rem 1.5rem; border-radius:8px; text-align:center; box-shadow:0 12px 40px rgba(0,0,0,.5); z-index:2; }
   .about-badge .num { font-family:'Bebas Neue',sans-serif; font-size:2.5rem; line-height:1; }
@@ -533,8 +544,29 @@
 <section id="about">
   <div class="about-image-stack">
     <div class="guinea-photo-grid">
-      <!-- Row 1: wide dancer + flag monument -->
-      <div class="gp gp-wide"><img src="https://raw.githubusercontent.com/djolibarestaurant/djoliba-website/main/about-images/about1.jpg" alt="Traditional Guinean dancers in white"></div>
+      <!-- Row 1: food slideshow (wide) + flag monument -->
+      <div class="gp gp-wide gp-slideshow" id="foodSlideshow">
+        <img src="https://raw.githubusercontent.com/djolibarestaurant/djoliba-website/main/slideshow/food01.jpg" alt="Djoliba food" class="active">
+        <img src="https://raw.githubusercontent.com/djolibarestaurant/djoliba-website/main/slideshow/food02.jpg" alt="Djoliba food">
+        <img src="https://raw.githubusercontent.com/djolibarestaurant/djoliba-website/main/slideshow/food03.jpg" alt="Djoliba food">
+        <img src="https://raw.githubusercontent.com/djolibarestaurant/djoliba-website/main/slideshow/food04.jpg" alt="Djoliba food">
+        <img src="https://raw.githubusercontent.com/djolibarestaurant/djoliba-website/main/slideshow/food05.jpg" alt="Djoliba food">
+        <img src="https://raw.githubusercontent.com/djolibarestaurant/djoliba-website/main/slideshow/food06.jpg" alt="Djoliba food">
+        <img src="https://raw.githubusercontent.com/djolibarestaurant/djoliba-website/main/slideshow/food07.jpg" alt="Djoliba food">
+        <img src="https://raw.githubusercontent.com/djolibarestaurant/djoliba-website/main/slideshow/food08.jpg" alt="Djoliba food">
+        <img src="https://raw.githubusercontent.com/djolibarestaurant/djoliba-website/main/slideshow/food09.jpg" alt="Djoliba food">
+        <img src="https://raw.githubusercontent.com/djolibarestaurant/djoliba-website/main/slideshow/food10.jpg" alt="Djoliba food">
+        <img src="https://raw.githubusercontent.com/djolibarestaurant/djoliba-website/main/slideshow/food11.jpg" alt="Djoliba food">
+        <img src="https://raw.githubusercontent.com/djolibarestaurant/djoliba-website/main/slideshow/food12.jpg" alt="Djoliba food">
+        <img src="https://raw.githubusercontent.com/djolibarestaurant/djoliba-website/main/slideshow/food13.jpg" alt="Djoliba food">
+        <img src="https://raw.githubusercontent.com/djolibarestaurant/djoliba-website/main/slideshow/food14.jpg" alt="Djoliba food">
+        <img src="https://raw.githubusercontent.com/djolibarestaurant/djoliba-website/main/slideshow/food15.jpg" alt="Djoliba food">
+        <img src="https://raw.githubusercontent.com/djolibarestaurant/djoliba-website/main/slideshow/food16.jpg" alt="Djoliba food">
+        <img src="https://raw.githubusercontent.com/djolibarestaurant/djoliba-website/main/slideshow/food17.jpg" alt="Djoliba food">
+        <img src="https://raw.githubusercontent.com/djolibarestaurant/djoliba-website/main/slideshow/food18.jpg" alt="Djoliba food">
+        <img src="https://raw.githubusercontent.com/djolibarestaurant/djoliba-website/main/slideshow/food19.jpg" alt="Djoliba food">
+        <img src="https://raw.githubusercontent.com/djolibarestaurant/djoliba-website/main/slideshow/food20.jpg" alt="Djoliba food">
+      </div>
       <div class="gp"><img src="https://raw.githubusercontent.com/djolibarestaurant/djoliba-website/main/about-images/about9.jpg" alt="Guinea flag monument" style="object-position:center top"></div>
       <!-- Row 2: men with sticks | performer | fisherman tall -->
       <div class="gp"><img src="https://raw.githubusercontent.com/djolibarestaurant/djoliba-website/main/about-images/about2.jpg" alt="Men with ceremonial sticks"></div>
@@ -976,6 +1008,19 @@ async function init() {
   await loadSiteContent();
 }
 init();
+
+// ─── FOOD SLIDESHOW ───────────────────────────────────
+(function() {
+  const slideshow = document.getElementById('foodSlideshow');
+  if (!slideshow) return;
+  const imgs = slideshow.querySelectorAll('img');
+  let current = 0;
+  setInterval(function() {
+    imgs[current].classList.remove('active');
+    current = (current + 1) % imgs.length;
+    imgs[current].classList.add('active');
+  }, 2000);
+})();
 
 // ─── MOBILE MENU ──────────────────────────────────────
 function toggleMobileMenu() {
