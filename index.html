@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DJOLIBA — Authentic Guinean Restaurant · Philadelphia, PA</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Bebas+Neue&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Bebas+Neue&family=Outfit:wght@300;400;500;600&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Kaushan+Script&display=swap" rel="stylesheet">
 <style>
   :root {
     --red: #C5192D; --red-dark: #8B0F1E;
@@ -198,26 +198,245 @@
   .about-feat h4 { font-size:.9rem; font-weight:700; color:#FCD116; margin-bottom:4px; letter-spacing:.04em; text-transform:uppercase; }
   .about-feat p { font-size:.78rem; color:rgba(255,255,255,0.82); margin:0; line-height:1.55; }
 
-  #menu { background:#FAF7F2; }
-  .menu-header { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:3rem; flex-wrap:wrap; gap:1rem; }
-  .menu-filters { display:flex; gap:.5rem; flex-wrap:wrap; }
-  .filter-btn { background:transparent; border:1px solid rgba(255,255,255,.12); color:#3D6B52; padding:.4rem 1rem; border-radius:100px; font-size:.8rem; font-family:'Outfit',sans-serif; cursor:pointer; transition:all .2s; }
-  .filter-btn.active,.filter-btn:hover { background:var(--red); border-color:var(--red); color:#1A3D2B; }
-  .menu-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:1.5rem; }
-  .menu-item { background:#FFFFFF; border:1px solid rgba(0,148,96,.2); border-radius:10px; overflow:hidden; transition:all .3s; cursor:pointer; box-shadow:0 2px 12px rgba(0,148,96,0.1); }
-  .menu-item:hover { transform:translateY(-4px); border-color:rgba(240,165,0,.25); box-shadow:0 16px 50px rgba(0,0,0,.4); }
-  .menu-item-img { height:190px; position:relative; overflow:hidden; }
-  .menu-item-img img { width:100%; height:100%; object-fit:cover; transition:transform .5s; }
-  .menu-item:hover .menu-item-img img { transform:scale(1.07); }
-  .menu-tag { position:absolute; top:10px; left:10px; background:var(--red); color:#fff; font-size:.68rem; font-weight:800; font-family:'Bebas Neue',sans-serif; letter-spacing:.12em; padding:4px 10px; border-radius:3px; box-shadow:0 2px 8px rgba(0,0,0,.35); }
-  .menu-tag.halal{background:var(--green);color:#fff} .menu-tag.special{background:var(--gold);color:var(--dark)}
-  .menu-item-body { padding:1.2rem; }
-  .menu-item-name { font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-weight:600; color:var(--text); margin-bottom:.4rem; }
-  .menu-item-desc { font-size:.82rem; color:#3D6B52; line-height:1.6; margin-bottom:1rem; }
-  .menu-item-footer { display:flex; align-items:center; justify-content:space-between; }
-  .menu-price { font-family:'Bebas Neue',sans-serif; font-size:1.5rem; color:var(--gold); letter-spacing:.05em; }
-  .order-dd-btn { background:var(--red); color:#fff; text-decoration:none; padding:0.4rem 1rem; border-radius:4px; font-size:0.78rem; font-weight:800; letter-spacing:0.06em; font-family:'Bebas Neue',sans-serif; transition:all .2s; white-space:nowrap; }
-  .order-dd-btn:hover { background:var(--gold); color:var(--dark); }
+  /* ── MENU SECTION (Design B style) ─────────────────── */
+  #menu { background:#1A1209; padding:80px 5%; }
+  #menu .section-label { color:#FCD116; }
+  #menu .section-label::before { background:#FCD116; }
+  #menu .section-title { color:#FFF6D6; }
+  #menu .section-title em { color:#FCD116; }
+
+  .menu-header { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:2rem; flex-wrap:wrap; gap:1rem; }
+  .menu-filters { display:flex; gap:.4rem; flex-wrap:wrap; }
+  .filter-btn {
+    background:transparent;
+    border:1px solid rgba(255,246,214,.18);
+    color:rgba(255,246,214,.7);
+    padding:.38rem 1rem;
+    border-radius:100px;
+    font-size:.78rem;
+    font-family:'Bricolage Grotesque','Outfit',sans-serif;
+    font-weight:700;
+    letter-spacing:.06em;
+    cursor:pointer;
+    transition:all .2s;
+  }
+  .filter-btn.active,.filter-btn:hover {
+    background:#B80D28;
+    border-color:#B80D28;
+    color:#FFF6D6;
+  }
+
+  /* Guinea flag accent bar above menu grid */
+  .menu-flag-bar {
+    height:6px;
+    background:linear-gradient(90deg, #B80D28 0% 33.33%, #FCD116 33.33% 66.66%, #006B43 66.66% 100%);
+    border-radius:3px;
+    margin-bottom:2rem;
+  }
+
+  /* Menu organized into category panels */
+  .menu-categories { display:flex; flex-direction:column; gap:2px; }
+
+  .menu-cat-panel {
+    border-radius:12px;
+    overflow:hidden;
+    margin-bottom:16px;
+  }
+
+  /* Panel header bar */
+  .menu-cat-header {
+    display:flex;
+    align-items:center;
+    gap:16px;
+    padding:18px 28px;
+    cursor:pointer;
+    user-select:none;
+    transition:opacity .2s;
+  }
+  .menu-cat-header:hover { opacity:.88; }
+
+  .menu-cat-num {
+    font-family:'Bebas Neue','Bricolage Grotesque',sans-serif;
+    font-size:3rem;
+    line-height:1;
+    opacity:.25;
+    flex:none;
+    min-width:48px;
+  }
+  .menu-cat-title-wrap { flex:1; }
+  .menu-cat-script {
+    font-family:'Kaushan Script',cursive;
+    font-size:1rem;
+    line-height:1;
+    margin-bottom:2px;
+  }
+  .menu-cat-name {
+    font-family:'Bricolage Grotesque','Outfit',sans-serif;
+    font-size:1.65rem;
+    font-weight:800;
+    line-height:1;
+    letter-spacing:-.02em;
+  }
+  .menu-cat-badge {
+    flex:none;
+    font-family:'Bricolage Grotesque',sans-serif;
+    font-size:.78rem;
+    font-weight:800;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    padding:5px 14px;
+    border-radius:100px;
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  .menu-cat-chevron {
+    font-size:.9rem;
+    transition:transform .25s;
+    opacity:.6;
+  }
+  .menu-cat-panel.collapsed .menu-cat-chevron { transform:rotate(-90deg); }
+
+  /* Panel body — item list */
+  .menu-cat-body {
+    padding:0 28px 22px;
+  }
+  .menu-cat-panel.collapsed .menu-cat-body { display:none; }
+
+  .menu-divider {
+    height:3px;
+    width:52px;
+    border-radius:2px;
+    margin:0 0 16px 64px;
+  }
+
+  /* Individual item row */
+  .menu-row {
+    display:flex;
+    align-items:center;
+    gap:14px;
+    padding:10px 0;
+    border-bottom:1px solid rgba(255,246,214,.1);
+  }
+  .menu-row:last-child { border-bottom:none; }
+
+  .menu-row-img {
+    flex:none;
+    width:72px;
+    height:60px;
+    border-radius:8px;
+    overflow:hidden;
+    background:#2a2015;
+  }
+  .menu-row-img img {
+    width:100%; height:100%; object-fit:cover;
+    display:block;
+    transition:transform .4s;
+  }
+  .menu-row:hover .menu-row-img img { transform:scale(1.08); }
+
+  .menu-row-info { flex:1; min-width:0; }
+  .menu-row-name {
+    font-family:'Bricolage Grotesque',sans-serif;
+    font-size:1rem;
+    font-weight:700;
+    line-height:1.2;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .menu-row-desc {
+    font-size:.78rem;
+    line-height:1.45;
+    opacity:.72;
+    margin-top:2px;
+    /* clamp to 2 lines */
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+  }
+
+  .menu-row-right {
+    flex:none;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+    gap:6px;
+  }
+  .menu-row-price {
+    font-family:'Bebas Neue',sans-serif;
+    font-size:1.35rem;
+    line-height:1;
+    letter-spacing:.04em;
+  }
+  .menu-row-btns { display:flex; gap:5px; }
+  .order-dd-btn {
+    text-decoration:none;
+    padding:.3rem .75rem;
+    border-radius:4px;
+    font-size:.68rem;
+    font-weight:800;
+    letter-spacing:.05em;
+    font-family:'Bricolage Grotesque','Bebas Neue',sans-serif;
+    transition:all .2s;
+    white-space:nowrap;
+  }
+  .order-dd-btn:hover { filter:brightness(1.15); transform:translateY(-1px); }
+
+  /* Theme per panel */
+  .menu-panel-dark  { background:#1A1209; color:#FFF6D6; }
+  .menu-panel-cream { background:#FFF6D6; color:#1A1209; }
+  .menu-panel-green { background:#006B43; color:#FFF6D6; }
+  .menu-panel-red   { background:#B80D28; color:#FFF6D6; }
+
+  .menu-panel-dark  .menu-cat-script { color:#FCD116; }
+  .menu-panel-dark  .menu-cat-num    { color:#FFF6D6; }
+  .menu-panel-cream .menu-cat-script { color:#B80D28; }
+  .menu-panel-cream .menu-cat-num    { color:#1A1209; }
+  .menu-panel-green .menu-cat-script { color:#FCD116; }
+  .menu-panel-green .menu-cat-num    { color:#FFF6D6; }
+  .menu-panel-red   .menu-cat-script { color:#FCD116; }
+  .menu-panel-red   .menu-cat-num    { color:#FFF6D6; }
+
+  .menu-panel-dark  .menu-row-name   { color:#FFF6D6; }
+  .menu-panel-dark  .menu-row-desc   { color:rgba(255,246,214,.72); }
+  .menu-panel-dark  .menu-row-price  { color:#FCD116; }
+  .menu-panel-dark  .menu-divider    { background:#B80D28; }
+  .menu-panel-dark  .menu-row        { border-bottom-color:rgba(255,246,214,.1); }
+
+  .menu-panel-cream .menu-row-name   { color:#1A1209; }
+  .menu-panel-cream .menu-row-desc   { color:rgba(26,18,9,.68); }
+  .menu-panel-cream .menu-row-price  { color:#B80D28; }
+  .menu-panel-cream .menu-divider    { background:#006B43; }
+  .menu-panel-cream .menu-row        { border-bottom-color:rgba(26,18,9,.12); }
+  .menu-panel-cream .menu-row-img    { background:#e8e0c8; }
+
+  .menu-panel-green .menu-row-name   { color:#FFF6D6; }
+  .menu-panel-green .menu-row-desc   { color:rgba(255,246,214,.72); }
+  .menu-panel-green .menu-row-price  { color:#FCD116; }
+  .menu-panel-green .menu-divider    { background:#FCD116; }
+  .menu-panel-green .menu-row        { border-bottom-color:rgba(255,246,214,.15); }
+  .menu-panel-green .menu-row-img    { background:#004d30; }
+
+  .menu-panel-red   .menu-row-name   { color:#FFF6D6; }
+  .menu-panel-red   .menu-row-desc   { color:rgba(255,246,214,.72); }
+  .menu-panel-red   .menu-row-price  { color:#FCD116; }
+  .menu-panel-red   .menu-divider    { background:#FCD116; }
+  .menu-panel-red   .menu-row        { border-bottom-color:rgba(255,246,214,.15); }
+  .menu-panel-red   .menu-row-img    { background:#8b0a1e; }
+
+  /* Mobile overrides */
+  @media(max-width:768px){
+    #menu { padding:60px 4%; }
+    .menu-cat-header { padding:14px 16px; }
+    .menu-cat-body   { padding:0 16px 16px; }
+    .menu-cat-name   { font-size:1.3rem; }
+    .menu-cat-num    { font-size:2rem; min-width:36px; }
+    .menu-row-img    { width:56px; height:48px; }
+    .menu-divider    { margin-left:48px; }
+    .order-dd-btn    { font-size:.6rem; padding:.28rem .55rem; }
+  }
 
   #order { background:var(--dark-mid); }
   .order-layout { display:grid; grid-template-columns:1fr 400px; gap:3rem; align-items:start; }
@@ -386,15 +605,6 @@
   .menu-header{flex-direction:column;align-items:flex-start}
   .menu-filters{gap:0.4rem}
   .filter-btn{font-size:0.72rem;padding:0.35rem 0.8rem}
-  .menu-grid{grid-template-columns:1fr 1fr;gap:0.8rem}
-  .menu-item-img{height:140px}
-  .menu-item-name{font-size:0.95rem}
-  .menu-item-desc{font-size:0.72rem;line-height:1.4;margin-bottom:0.6rem}
-  .menu-item-body{padding:0.8rem}
-  .menu-item-footer{flex-direction:column;align-items:flex-start;gap:0.4rem}
-  .menu-item-footer>div{display:flex;gap:4px;width:100%}
-  .menu-price{font-size:1.1rem}
-  .order-dd-btn{flex:1;text-align:center;font-size:0.6rem;padding:0.3rem 0.3rem;white-space:nowrap}
 
   /* Order */
   #order{padding:60px 4%}
@@ -595,20 +805,21 @@
   <div class="menu-header">
     <div>
       <div class="section-label">Our Menu</div>
-      <h2 class="section-title">Signature <em>Guinean Dishes</em></h2>
+      <h2 class="section-title">Authentic <em>Guinean Cuisine</em></h2>
     </div>
     <div class="menu-filters">
       <button class="filter-btn active" onclick="filterMenu('all',this)">All</button>
-      <button class="filter-btn" onclick="filterMenu('special',this)">⭐ Special</button>
+      <button class="filter-btn" onclick="filterMenu('special',this)">⭐ Specials</button>
       <button class="filter-btn" onclick="filterMenu('grill',this)">Main Course</button>
-      <button class="filter-btn" onclick="filterMenu('fryer',this)">From the Fryer</button>
-      <button class="filter-btn" onclick="filterMenu('sauces',this)">Sauces</button>
+      <button class="filter-btn" onclick="filterMenu('fryer',this)">Fryer</button>
       <button class="filter-btn" onclick="filterMenu('stew',this)">Seafood</button>
+      <button class="filter-btn" onclick="filterMenu('sauces',this)">Sauces</button>
       <button class="filter-btn" onclick="filterMenu('desserts',this)">Desserts</button>
       <button class="filter-btn" onclick="filterMenu('drinks',this)">Drinks</button>
     </div>
   </div>
-  <div class="menu-grid" id="menuGrid"></div>
+  <div class="menu-flag-bar"></div>
+  <div class="menu-categories" id="menuGrid"></div>
 </section>
 
 
@@ -901,10 +1112,74 @@ const localMenuItems = [
 
 let menuItems=[],currentFilter='all';
 
+// Category metadata: order, display name, script label, theme, badge text, panel number
+const CAT_META = {
+  special: { num:'01', name:'Special Meals',  script:'$23 each · with 1 side', theme:'menu-panel-dark',  badge:'⭐ Fan Favorites', badgeBg:'#FCD116', badgeColor:'#1A1209' },
+  grill:   { num:'02', name:'Main Course',    script:'served with 1 side',     theme:'menu-panel-cream', badge:'🔥 Grilled',        badgeBg:'#B80D28', badgeColor:'#FFF6D6' },
+  fryer:   { num:'03', name:'From the Fryer', script:'golden & crispy',         theme:'menu-panel-dark',  badge:'',                  badgeBg:'',        badgeColor:'' },
+  stew:    { num:'04', name:'Seafood',         script:'fresh catch',             theme:'menu-panel-green', badge:'🦐 Fresh',          badgeBg:'#FCD116', badgeColor:'#1A1209' },
+  sauces:  { num:'05', name:'Sauces',          script:'served with rice',        theme:'menu-panel-cream', badge:'🍛 $18–$23',        badgeBg:'#1A1209', badgeColor:'#FFF6D6' },
+  desserts:{ num:'06', name:'Desserts',        script:'something sweet',         theme:'menu-panel-red',   badge:'🍮 Sweet',          badgeBg:'#FCD116', badgeColor:'#1A1209' },
+  drinks:  { num:'07', name:'Drinks',          script:'house-made & bottled',    theme:'menu-panel-green', badge:'🥤 Refresh',        badgeBg:'#FCD116', badgeColor:'#1A1209' },
+};
+
+const CAT_ORDER = ['special','grill','fryer','stew','sauces','desserts','drinks'];
+
+const DD  = 'https://www.doordash.com/store/djoliba-philadelphia-31716157/';
+const UE  = 'https://www.ubereats.com/store/djoliba-6735-elmwood-avenue/uOYLNBFFW3WuG21foNTmFw';
+
+function renderMenuRow(item, theme) {
+  const isLight = theme === 'menu-panel-cream';
+  const ddBg = isLight ? '#B80D28' : '#FCD116';
+  const ddColor = isLight ? '#FFF6D6' : '#1A1209';
+  const ueBg = '#06C167';
+  const ueColor = '#fff';
+  return `<div class="menu-row">
+    <div class="menu-row-img"><img src="${item.img}" alt="${item.name}" loading="lazy"></div>
+    <div class="menu-row-info">
+      <div class="menu-row-name">${item.name}</div>
+      <div class="menu-row-desc">${item.desc}</div>
+    </div>
+    <div class="menu-row-right">
+      <span class="menu-row-price">$${item.price % 1 === 0 ? item.price : item.price.toFixed(2)}</span>
+      <div class="menu-row-btns">
+        <a href="${DD}" target="_blank" class="order-dd-btn" style="background:${ddBg};color:${ddColor}">DD</a>
+        <a href="${UE}" target="_blank" class="order-dd-btn" style="background:${ueBg};color:${ueColor}">Uber</a>
+      </div>
+    </div>
+  </div>`;
+}
+
 function renderMenu(){
-  const g=document.getElementById('menuGrid');
-  const f=currentFilter==='all'?menuItems:menuItems.filter(i=>i.category===currentFilter);
-  g.innerHTML=f.map(item=>`<div class="menu-item"><div class="menu-item-img"><img src="${item.img}" alt="${item.name}" loading="lazy"><span class="menu-tag ${item.tagClass}">${item.tag}</span></div><div class="menu-item-body"><div class="menu-item-name">${item.name}</div><div class="menu-item-desc">${item.desc}</div><div class="menu-item-footer"><span class="menu-price">$${item.price.toFixed(2)}</span><div style="display:flex;gap:6px"><a href="https://www.doordash.com/store/djoliba-philadelphia-31716157/" target="_blank" class="order-dd-btn" style="background:var(--red)">DoorDash</a><a href="https://www.ubereats.com/store/djoliba-6735-elmwood-avenue/uOYLNBFFW3WuG21foNTmFw" target="_blank" class="order-dd-btn" style="background:#06C167">Uber Eats</a></div></div></div></div>`).join('');
+  const g = document.getElementById('menuGrid');
+  const cats = currentFilter === 'all' ? CAT_ORDER : [currentFilter];
+
+  g.innerHTML = cats.map((cat, idx) => {
+    const items = menuItems.filter(i => i.category === cat);
+    if (!items.length) return '';
+    const m = CAT_META[cat] || { num: String(idx+1).padStart(2,'0'), name: cat, script:'', theme:'menu-panel-dark', badge:'', badgeBg:'', badgeColor:'' };
+    const badge = m.badge ? `<span class="menu-cat-badge" style="background:${m.badgeBg};color:${m.badgeColor}">${m.badge}</span>` : '';
+    return `<div class="menu-cat-panel ${m.theme}" id="panel-${cat}">
+      <div class="menu-cat-header" onclick="togglePanel('${cat}')">
+        <span class="menu-cat-num">${m.num}</span>
+        <div class="menu-cat-title-wrap">
+          <div class="menu-cat-script">${m.script}</div>
+          <div class="menu-cat-name">${m.name}</div>
+        </div>
+        ${badge}
+        <span class="menu-cat-chevron">▼</span>
+      </div>
+      <div class="menu-cat-body">
+        <div class="menu-divider"></div>
+        ${items.map(item => renderMenuRow(item, m.theme)).join('')}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function togglePanel(cat) {
+  const panel = document.getElementById('panel-' + cat);
+  if (panel) panel.classList.toggle('collapsed');
 }
 
 function filterMenu(cat,btn){
