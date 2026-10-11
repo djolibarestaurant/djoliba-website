@@ -1053,199 +1053,185 @@ async function saveMenuToSupabase(items) {
 const BASE = "https://raw.githubusercontent.com/djolibarestaurant/djoliba-website/main/slideshow/";
 const RAWBASE = "https://raw.githubusercontent.com/djolibarestaurant/djoliba-website/main/";
 const localMenuItems = [
-  // ── SPECIAL MEALS — $23 each, served with 1 side ─────────────────
-  // food01: Lafidi & Fried Tilapia (dried rice + whole fried fish)
-  {id:1, name:"Lafidi & Fried Tilapia",   category:"special", price:23.00,
-   desc:"Lafidi — our slow-dried Guinean rice — paired with a whole golden-fried tilapia. A true taste of home you won't find anywhere else in Philly.",
-   tag:"Signature", tagClass:"special", img:BASE+"food01.jpg"},
+  // ── OUR GRILL / MAIN COURSE (+1 SIDE WITH EVERY MAIN) ───────────
+  {id:1,  name:"Dibi Lamb · Cubes",        category:"grill", price:28.00,
+   desc:"Tender lamb cubes grilled over the flame with onions and pepper sauce.",
+   tag:"", tagClass:"", img:BASE+"food17.jpg"},
 
-  // food06: Tchiep & King Fish (jollof-style rice with fish)
-  {id:2, name:"Tchiep & King Fish",        category:"special", price:23.00,
-   desc:"Senegalese-style jollof rice slow-cooked with king fish and a rich tomato broth. The classic West African celebration dish.",
-   tag:"Fan Fave", tagClass:"special", img:BASE+"food06.jpg"},
+  {id:2,  name:"Dibi Lamb · Steak",        category:"grill", price:28.00,
+   desc:"A thick lamb steak, charred and juicy, with onions and a spicy dip.",
+   tag:"", tagClass:"", img:BASE+"food07.jpg"},
 
-  // food04: Toguè — dark bean stew
-  {id:3, name:"Toguè (Beans & Beef)",      category:"special", price:23.00,
-   desc:"Hearty Guinean black-eyed beans simmered low and slow with tender beef. Rich, filling, and deeply comforting.",
-   tag:"Hearty", tagClass:"special", img:BASE+"food04.jpg"},
+  {id:3,  name:"Lamb Shank · Gigot",       category:"grill", price:28.00,
+   desc:"Slow-cooked lamb shank, fall-off-the-bone tender and well seasoned.",
+   tag:"", tagClass:"", img:BASE+"food05.jpg"},
 
-  // food19: Maninka To — smooth porridge-style dish
-  {id:4, name:"Maninka To",                category:"special", price:23.00,
-   desc:"Traditional Maninka corn flour porridge, thick and velvety — a beloved Guinean staple served at family tables and celebrations alike.",
-   tag:"Traditional", tagClass:"special", img:BASE+"food19.jpg"},
+  {id:4,  name:"Snapper · Grilled or Fried", category:"grill", price:38.00,
+   desc:"Whole red snapper in Guinean spices, grilled or fried to order.",
+   tag:"", tagClass:"", img:BASE+"food12.jpg"},
 
-  // food03: Goat Pepper Soup — rich broth with visible meat
-  {id:5, name:"Goat Pepper Soup",          category:"special", price:23.00,
-   desc:"Deeply aromatic broth loaded with tender goat, Guinean spice blend, and fresh herbs. Bold heat, incredible depth.",
-   tag:"Spicy", tagClass:"special", img:BASE+"food03.jpg"},
+  {id:5,  name:"Grilled Tilapia",          category:"grill", price:23.00,
+   desc:"Whole tilapia marinated in Guinean spices, grilled golden and smoky.",
+   tag:"", tagClass:"", img:BASE+"food19.jpg"},
 
-  // ── MAIN COURSE — served with 1 side ─────────────────────────────
-  // food18: Dibi Lamb Cubes — grilled cubed meat
-  {id:6,  name:"Dibi Lamb (Cubes)",        category:"grill", price:28.00,
-   desc:"Bite-sized lamb pieces marinated in Guinean spice paste and chargrilled for a smoky, caramelized crust and juicy interior.",
-   tag:"Popular", tagClass:"", img:BASE+"food18.jpg"},
+  {id:6,  name:"Fried Tilapia",            category:"grill", price:23.00,
+   desc:"Whole tilapia fried crisp outside, flaky and moist inside.",
+   tag:"", tagClass:"", img:BASE+"food19.jpg"},
 
-  // food07: Dibi Lamb Steak — flat grilled lamb pieces
-  {id:7,  name:"Dibi Lamb (Steak)",        category:"grill", price:28.00,
-   desc:"Flat lamb steak cuts grilled over high heat — tender, smoky, and packed with flavor. Our #1 most-ordered dish.",
-   tag:"#1 Liked", tagClass:"special", img:BASE+"food07.jpg"},
+  {id:7,  name:"Grilled Chicken · Pieces", category:"grill", price:23.00,
+   desc:"Juicy chicken pieces, spiced and grilled over the flame.",
+   tag:"", tagClass:"", img:BASE+"food16.jpg"},
 
-  // food14: Lamb Shank (Gigot) — bone-in shank
-  {id:8,  name:"Lamb Shank (Gigot)",       category:"grill", price:28.00,
-   desc:"A whole lamb shank slow-roasted then finished on the grill. Fall-off-the-bone tender, perfumed with herbs and Guinean spice.",
-   tag:"Halal", tagClass:"halal", img:BASE+"food14.jpg"},
+  {id:8,  name:"Kebab · Chicken or Beef",  category:"grill", price:23.00,
+   desc:"Marinated skewers grilled over the flame with onions and pepper sauce.",
+   tag:"", tagClass:"", img:BASE+"food14.jpg"},
 
-  // food20: Grilled Tilapia — whole grilled fish
-  {id:9,  name:"Grilled Tilapia",          category:"grill", price:23.00,
-   desc:"Whole fresh tilapia scored and rubbed with a Guinean herb-spice blend, then grilled over flame for a smoky, charred finish.",
-   tag:"Halal", tagClass:"halal", img:BASE+"food20.jpg"},
+  {id:9,  name:"Scotch Egg · Beef",        category:"grill", price:23.00,
+   desc:"A soft egg wrapped in seasoned beef, fried golden.",
+   tag:"", tagClass:"", img:BASE+"food15.jpg"},
 
-  // food17: Grilled Chicken Pieces — plated chicken
-  {id:10, name:"Grilled Chicken (Pieces)", category:"grill", price:23.00,
-   desc:"Chicken pieces marinated overnight in Djoliba's house spice blend and fire-grilled until the skin is crispy and the meat falls off the bone.",
-   tag:"Halal", tagClass:"halal", img:BASE+"food17.jpg"},
+  // ── HOUSE FAVORITES / SPECIAL MEALS (FROM $23) ───────────────────
+  {id:10, name:"Tchiep & King Fish",       category:"special", price:23.00,
+   desc:"Guinea's beloved rice dish cooked with king fish and vegetables.",
+   tag:"", tagClass:"", img:BASE+"food01.jpg"},
 
-  // food15: Scotch Egg (Beef) — egg wrapped in ground beef
-  {id:11, name:"Scotch Egg (Beef)",        category:"grill", price:23.00,
-   desc:"A soft-boiled egg wrapped in seasoned ground beef, coated and fried until perfectly golden — a Djoliba original you have to try.",
-   tag:"New", tagClass:"special", img:BASE+"food15.jpg"},
+  {id:11, name:"Toguè · Beans & Beef",     category:"special", price:23.00,
+   desc:"Hearty stewed beans simmered with tender beef.",
+   tag:"", tagClass:"", img:BASE+"food04.jpg"},
 
-  // food12: Kebab — skewered meat on plate
-  {id:12, name:"Kebab (Chicken or Beef)",  category:"grill", price:23.00,
-   desc:"Skewered chicken or beef marinated in Guinean spices and grilled over open flame. Juicy, smoky, and endlessly satisfying.",
-   tag:"New", tagClass:"special", img:BASE+"food12.jpg"},
+  {id:12, name:"Lafidi & Fried Tilapia",   category:"special", price:23.00,
+   desc:"A traditional Guinean favorite served with crispy fried tilapia.",
+   tag:"", tagClass:"", img:BASE+"food19.jpg"},
 
-  // ── FROM THE FRYER ────────────────────────────────────────────────
-  // food01 variant: fried tilapia (same dish, distinct from lafidi combo)
-  {id:13, name:"Fried Tilapia",            category:"fryer", price:23.00,
-   desc:"Whole tilapia seasoned with Guinean spice blend and fried until golden and crispy from head to tail. Served with your choice of side.",
-   tag:"Popular", tagClass:"", img:BASE+"food01.jpg"},
+  {id:13, name:"Maninka To",               category:"special", price:23.00,
+   desc:"Soft, warm Maninka porridge (tô) served with a savory sauce.",
+   tag:"", tagClass:"", img:BASE+"food20.jpg"},
 
-  // ── SEAFOOD ───────────────────────────────────────────────────────
-  // food05 / food12: Grilled Snapper
-  {id:14, name:"Grilled Snapper",          category:"stew", price:38.00,
-   desc:"A whole fresh snapper marinated with herbs, citrus, and spices, then grilled until the skin chars beautifully and the flesh stays moist.",
-   tag:"Premium", tagClass:"special", img:BASE+"food05.jpg"},
+  {id:14, name:"Goat Pepper Soup",         category:"special", price:23.00,
+   desc:"Tender goat in a hot, aromatic pepper broth.",
+   tag:"", tagClass:"", img:BASE+"food03.jpg"},
 
-  // food20: Fried Snapper
-  {id:15, name:"Fried Snapper",            category:"stew", price:38.00,
-   desc:"Whole snapper fried until the skin is shatteringly crisp and the flesh inside is perfectly flaky and tender.",
-   tag:"Halal", tagClass:"halal", img:BASE+"food13.jpg"},
+  {id:15, name:"Poulet Mayo",              category:"special", price:25.00,
+   desc:"Tender chicken topped with our creamy house mayo sauce.",
+   tag:"New", tagClass:"special", img:BASE+"food16.jpg"},
 
-  // food03: Seafood Pepper Soup — broth with seafood
-  {id:16, name:"Seafood Pepper Soup",      category:"stew", price:35.00,
-   desc:"A bold Guinean pepper broth loaded with fresh mixed seafood. Deeply warming, packed with aromatics — the ultimate comfort soup.",
-   tag:"Chef Pick", tagClass:"special", img:BASE+"food03.jpg"},
+  {id:16, name:"Dibi Mayo",                category:"special", price:30.00,
+   desc:"Grilled dibi lamb finished with our creamy house mayo sauce.",
+   tag:"New", tagClass:"special", img:BASE+"food13.jpg"},
 
-  // ── SAUCES — all served with rice ────────────────────────────────
-  // food16: Cassava Leaves — dark leafy green stew
-  {id:17, name:"Cassava Leaves (Tadai)",   category:"sauces", price:18.00,
-   desc:"Tender young cassava leaves slow-cooked with chicken or beef into a rich, earthy stew. One of Guinea's most beloved dishes.",
-   tag:"Halal", tagClass:"halal", img:BASE+"food16.jpg"},
+  // ── FROM THE SEA / SEAFOOD SPECIALS (EACH SERVED WITH RICE) ─────
+  {id:17, name:"Potato Greens",            category:"stew", price:23.00,
+   desc:"Tender potato leaves slow-cooked with seafood. Served with rice.",
+   tag:"", tagClass:"", img:BASE+"food11.jpg"},
 
-  // food08: Potato Leaves / Okra dishes (green-tinged sauce)
-  {id:18, name:"Potato Leaves",            category:"sauces", price:18.00,
-   desc:"Hearty potato leaf stew cooked with your choice of protein — bold, nourishing, and packed with the taste of Guinea.",
-   tag:"Halal", tagClass:"halal", img:BASE+"food08.jpg"},
+  {id:18, name:"Peanut Butter Sauce",      category:"stew", price:23.00,
+   desc:"Rich, creamy peanut sauce with seafood. Served with rice.",
+   tag:"", tagClass:"", img:BASE+"food09.jpg"},
 
-  // food09: Peanut Butter Soup — golden-brown creamy sauce
-  {id:19, name:"Peanut Butter Soup (Kanciye)", category:"sauces", price:18.00,
-   desc:"Creamy peanut stew made with slowly cooked peanut paste, spices, and your choice of chicken or beef. A Guinean soul food classic.",
-   tag:"Signature", tagClass:"special", img:BASE+"food09.jpg"},
+  {id:19, name:"Palava Sauce",             category:"stew", price:23.00,
+   desc:"Leafy palava sauce simmered with seafood. Served with rice.",
+   tag:"", tagClass:"", img:BASE+"food11.jpg"},
 
-  // RAWBASE+menu-maganyi: Maganyi — caramelized onion sauce
-  {id:20, name:"Maganyi (Onion Sauce)",    category:"sauces", price:18.00,
-   desc:"Deeply caramelized onion sauce with chicken or beef — the sweet, savory Djoliba sauce our regulars can't stop ordering.",
-   tag:"Fan Fave", tagClass:"special", img:RAWBASE+"menu-maganyi.jpg"},
+  {id:20, name:"Seafood Pepper Soup",      category:"stew", price:35.00,
+   desc:"Our hot pepper soup loaded with assorted seafood.",
+   tag:"", tagClass:"", img:BASE+"food03.jpg"},
 
-  // food02: Tobogui — rich brown sauce
-  {id:21, name:"Tobogui",                  category:"sauces", price:18.00,
-   desc:"A traditional Guinean sauce with a distinctive deep, savory flavor. Ask the staff what's in it — the recipe is a family secret.",
-   tag:"Traditional", tagClass:"special", img:BASE+"food02.jpg"},
+  // ── WITH RICE / SAUCES (ALL SERVED WITH RICE) ────────────────────
+  {id:21, name:"Cassava Leaves (Tadai)",   category:"sauces", price:18.00,
+   desc:"Pounded cassava leaves slow-cooked until deep and savory.",
+   tag:"", tagClass:"", img:BASE+"food08.jpg"},
 
-  // food10: Tomato Sauce (Mixed Meat) — red tomato sauce
-  {id:22, name:"Tomato Sauce (Mixed Meat)",category:"sauces", price:18.00,
-   desc:"Rich house-made tomato sauce simmered with a mix of tender meats. Simple, hearty, and deeply satisfying over rice.",
-   tag:"Halal", tagClass:"halal", img:BASE+"food10.jpg"},
+  {id:22, name:"Potato Leaves",            category:"sauces", price:18.00,
+   desc:"Tender potato leaves simmered with meat or fish.",
+   tag:"", tagClass:"", img:BASE+"food11.jpg"},
 
-  // food10: Tomato Sauce (Fish)
-  {id:23, name:"Tomato Sauce (Fish)",      category:"sauces", price:18.00,
-   desc:"Light tomato sauce slow-cooked with fresh fish until it breaks into the sauce beautifully. Served over white or brown rice.",
-   tag:"Halal", tagClass:"halal", img:BASE+"food10.jpg"},
+  {id:23, name:"Peanut Butter Soup",       category:"sauces", price:18.00,
+   desc:"Creamy peanut soup with tender meat.",
+   tag:"", tagClass:"", img:BASE+"food09.jpg"},
 
-  // food10: Tomato Sauce (Fish Balls)
-  {id:24, name:"Tomato Sauce (Fish Balls)",category:"sauces", price:18.00,
-   desc:"Homemade fish balls cooked in our house tomato sauce — a Djoliba specialty the whole family will love.",
-   tag:"Special", tagClass:"special", img:BASE+"food10.jpg"},
+  {id:24, name:"Maganyi (Onion Sauce)",    category:"sauces", price:18.00,
+   desc:"Fried onion sauce, sweet and savory.",
+   tag:"", tagClass:"", img:RAWBASE+"menu-maganyi.jpg"},
 
-  // food11: Palava Sauce — green leafy stew
-  {id:25, name:"Palava Sauce",             category:"sauces", price:18.00,
-   desc:"A West African classic — tender leafy greens stewed with your choice of protein in a savory, spiced sauce. Served over rice.",
-   tag:"Halal", tagClass:"halal", img:BASE+"food11.jpg"},
+  {id:25, name:"Tobogui",                  category:"sauces", price:18.00,
+   desc:"A Guinean home-style sauce, bold and hearty.",
+   tag:"", tagClass:"", img:BASE+"food02.jpg"},
 
-  // food08: Fried Okra Sauce
-  {id:26, name:"Fried Okra Sauce",         category:"sauces", price:18.00,
-   desc:"Sliced okra lightly fried to soften and remove the slip, then cooked into a bold sauce with chicken or beef and served over rice.",
-   tag:"Popular", tagClass:"", img:BASE+"food08.jpg"},
+  {id:26, name:"Tomato Sauce (Mixed Meat)",category:"sauces", price:18.00,
+   desc:"Tomato sauce with an assortment of meats.",
+   tag:"", tagClass:"", img:BASE+"food04.jpg"},
 
-  // food02: Palm Butter Sauce
-  {id:27, name:"Palm Butter Sauce",        category:"sauces", price:18.00,
-   desc:"Velvety palm fruit sauce — deep, rich, and full-bodied. A West African table staple, best enjoyed over white rice.",
-   tag:"Halal", tagClass:"halal", img:BASE+"food02.jpg"},
+  {id:27, name:"Tomato Sauce (Fish)",      category:"sauces", price:18.00,
+   desc:"Tomato sauce cooked with fish.",
+   tag:"", tagClass:"", img:BASE+"food08.jpg"},
 
-  // food20: Konkoye (Smoked Fish) — smoked fish dish
-  {id:28, name:"Konkoye (Smoked Fish)",    category:"sauces", price:23.00,
-   desc:"Our legendary smoked catfish sauce — bold, aromatic, and deeply complex. The signature flavor that puts Djoliba on the map.",
-   tag:"Signature", tagClass:"special", img:BASE+"food20.jpg"},
+  {id:28, name:"Tomato Sauce (Fish Balls)",category:"sauces", price:18.00,
+   desc:"Tomato sauce with seasoned fish balls.",
+   tag:"", tagClass:"", img:BASE+"food08.jpg"},
 
-  // food08: Light Okra Soup
-  {id:29, name:"Light Okra Soup",          category:"sauces", price:23.00,
-   desc:"A clear, light okra soup — clean in flavor, satisfying in body. Perfect on its own or alongside a side of your choice.",
-   tag:"Halal", tagClass:"halal", img:BASE+"food08.jpg"},
+  {id:29, name:"Palava Sauce",             category:"sauces", price:18.00,
+   desc:"Leafy palava sauce, rich with palm oil.",
+   tag:"", tagClass:"", img:BASE+"food11.jpg"},
+
+  {id:30, name:"Fried Okra Sauce",         category:"sauces", price:18.00,
+   desc:"Okra fried and simmered into a thick sauce.",
+   tag:"", tagClass:"", img:BASE+"food08.jpg"},
+
+  {id:31, name:"Palm Butter Sauce",        category:"sauces", price:18.00,
+   desc:"Silky sauce made from the palm fruit.",
+   tag:"", tagClass:"", img:BASE+"food15.jpg"},
+
+  {id:32, name:"Konkoye (Smoked Fish)",    category:"sauces", price:23.00,
+   desc:"Smoked fish in a rich, savory sauce.",
+   tag:"", tagClass:"", img:BASE+"food08.jpg"},
+
+  {id:33, name:"Light Okra Soup",          category:"sauces", price:23.00,
+   desc:"A lighter okra soup, fresh and fragrant.",
+   tag:"", tagClass:"", img:BASE+"food08.jpg"},
 
   // ── DESSERTS ──────────────────────────────────────────────────────
-  {id:30, name:"Dégué",                    category:"desserts", price:7.00,
-   desc:"Creamy millet couscous folded into smooth yogurt with a hint of sweetness — Guinea's beloved dessert, light yet satisfying.",
-   tag:"Sweet", tagClass:"special", img:"https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=600&auto=format&fit=crop"},
+  {id:34, name:"Dégué",                    category:"desserts", price:7.00,
+   desc:"Millet and yogurt, chilled and sweet.",
+   tag:"", tagClass:"", img:BASE+"food18.jpg"},
 
-  {id:31, name:"Yahourt",                  category:"desserts", price:7.00,
-   desc:"Silky homemade Guinean-style yogurt — fresh, lightly sweet, and the perfect cool finish to any meal.",
-   tag:"Sweet", tagClass:"special", img:"https://images.unsplash.com/photo-1488477181946-6428a0291777?w=600&auto=format&fit=crop"},
+  {id:35, name:"Yahourt",                  category:"desserts", price:7.00,
+   desc:"Fresh, creamy homemade yogurt.",
+   tag:"", tagClass:"", img:"https://images.unsplash.com/photo-1488477181946-6428a0291777?w=600&auto=format&fit=crop"},
 
-  {id:32, name:"Monin",                    category:"desserts", price:5.00,
-   desc:"A refreshing syrup-based sweet drink, served chilled. Ask your server for the flavor of the day.",
-   tag:"Sweet", tagClass:"special", img:"https://images.unsplash.com/photo-1544145945-f90425340c7e?w=600&auto=format&fit=crop"},
+  {id:36, name:"Monin",                    category:"desserts", price:5.00,
+   desc:"A traditional Guinean sweet treat.",
+   tag:"", tagClass:"", img:"https://images.unsplash.com/photo-1544145945-f90425340c7e?w=600&auto=format&fit=crop"},
 
   // ── DRINKS ────────────────────────────────────────────────────────
-  {id:33, name:"Bissap (Sorrel)",          category:"drinks", price:4.00,
-   desc:"House-brewed hibiscus drink — naturally sweet, deeply ruby-red, and bursting with floral flavor. A West African staple.",
+  {id:37, name:"Bissap",                   category:"drinks", price:4.00,
+   desc:"House-brewed hibiscus drink — naturally sweet and deeply refreshing.",
    tag:"House-Made", tagClass:"special", img:"https://images.unsplash.com/photo-1544145945-f90425340c7e?w=600&auto=format&fit=crop"},
 
-  {id:34, name:"Ginger",                   category:"drinks", price:5.00,
-   desc:"Fresh-pressed homemade ginger drink — bold, slightly spicy, and wonderfully refreshing. Made in-house daily.",
+  {id:38, name:"Ginger",                   category:"drinks", price:5.00,
+   desc:"Fresh homemade ginger drink — bold, spicy, and wonderfully refreshing.",
    tag:"House-Made", tagClass:"special", img:"https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=600&auto=format&fit=crop"},
 
-  {id:35, name:"Bissap Slushy",            category:"drinks", price:6.00,
-   desc:"Our hibiscus Bissap blended into an icy slushy — the perfect cool-down on a hot day.",
-   tag:"New", tagClass:"special", img:"https://images.unsplash.com/photo-1544145945-f90425340c7e?w=600&auto=format&fit=crop"},
+  {id:39, name:"Bissap Slushy",            category:"drinks", price:6.00,
+   desc:"Our hibiscus Bissap blended into an icy slushy.",
+   tag:"", tagClass:"", img:"https://images.unsplash.com/photo-1544145945-f90425340c7e?w=600&auto=format&fit=crop"},
 
-  {id:36, name:"Ginger Slushy",            category:"drinks", price:7.00,
-   desc:"Fresh homemade ginger, blended with ice into a spicy-sweet slushy. A Djoliba customer favorite!",
-   tag:"Popular", tagClass:"", img:"https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=600&auto=format&fit=crop"},
+  {id:40, name:"Ginger Slushy",            category:"drinks", price:7.00,
+   desc:"Fresh ginger blended with ice into a spicy-sweet slushy.",
+   tag:"", tagClass:"", img:"https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=600&auto=format&fit=crop"},
 
-  {id:37, name:"½ Gallon Bissap",          category:"drinks", price:12.00,
-   desc:"A half gallon of our house Bissap — perfect for sharing with the family or stocking up for the week.",
-   tag:"Family Size", tagClass:"", img:"https://images.unsplash.com/photo-1544145945-f90425340c7e?w=600&auto=format&fit=crop"},
+  {id:41, name:"½ Gallon Bissap",          category:"drinks", price:12.00,
+   desc:"A half gallon of our house Bissap — perfect for the family.",
+   tag:"", tagClass:"", img:"https://images.unsplash.com/photo-1544145945-f90425340c7e?w=600&auto=format&fit=crop"},
 
-  {id:38, name:"½ Gallon Ginger",          category:"drinks", price:14.00,
-   desc:"A half gallon of our fresh-pressed homemade ginger drink — big, bold flavor in bulk.",
-   tag:"Family Size", tagClass:"", img:"https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=600&auto=format&fit=crop"},
+  {id:42, name:"½ Gallon Ginger",          category:"drinks", price:14.00,
+   desc:"A half gallon of our fresh-pressed homemade ginger drink.",
+   tag:"", tagClass:"", img:"https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=600&auto=format&fit=crop"},
 
-  {id:39, name:"Arizona",                  category:"drinks", price:3.00,
+  {id:43, name:"Arizona",                  category:"drinks", price:3.00,
    desc:"Classic Arizona iced tea — your choice of variety, served chilled.",
    tag:"", tagClass:"", img:"https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=600&auto=format&fit=crop"},
 
-  {id:40, name:"Fruit Juice",              category:"drinks", price:3.00,
+  {id:44, name:"Fruit Juice",              category:"drinks", price:3.00,
    desc:"Chilled bottled fruit juice — ask your server for today's selection.",
    tag:"", tagClass:"", img:"https://images.unsplash.com/photo-1534353473418-4cfa0c056841?w=600&auto=format&fit=crop"},
 
@@ -1262,16 +1248,15 @@ let menuItems=[],currentFilter='all';
 
 // Category metadata: order, display name, script label, theme, badge text, panel number
 const CAT_META = {
-  special: { num:'01', name:'Special Meals',  script:'$23 each · with 1 side', theme:'menu-panel-dark',  badge:'⭐ Fan Favorites', badgeBg:'#FCD116', badgeColor:'#1A1209' },
-  grill:   { num:'02', name:'Main Course',    script:'served with 1 side',     theme:'menu-panel-cream', badge:'🔥 Grilled',        badgeBg:'#B80D28', badgeColor:'#FFF6D6' },
-  fryer:   { num:'03', name:'From the Fryer', script:'golden & crispy',         theme:'menu-panel-dark',  badge:'',                  badgeBg:'',        badgeColor:'' },
-  stew:    { num:'04', name:'Seafood',         script:'fresh catch',             theme:'menu-panel-green', badge:'🦐 Fresh',          badgeBg:'#FCD116', badgeColor:'#1A1209' },
-  sauces:  { num:'05', name:'Sauces',          script:'served with rice',        theme:'menu-panel-cream', badge:'🍛 $18–$23',        badgeBg:'#1A1209', badgeColor:'#FFF6D6' },
-  desserts:{ num:'06', name:'Desserts',        script:'something sweet',         theme:'menu-panel-red',   badge:'🍮 Sweet',          badgeBg:'#FCD116', badgeColor:'#1A1209' },
-  drinks:  { num:'07', name:'Drinks',          script:'house-made & bottled',    theme:'menu-panel-green', badge:'🥤 Refresh',        badgeBg:'#FCD116', badgeColor:'#1A1209' },
+  grill:   { num:'01', name:'Our Grill / Main Course',        script:'+1 side with every main',    theme:'menu-panel-cream', badge:'🔥 Grilled',       badgeBg:'#B80D28', badgeColor:'#FFF6D6' },
+  special: { num:'02', name:'House Favorites / Special Meals',script:'from $23 · made fresh daily',theme:'menu-panel-dark',  badge:'⭐ Fan Favorites', badgeBg:'#FCD116', badgeColor:'#1A1209' },
+  stew:    { num:'03', name:'From the Sea / Seafood Specials',script:'each served with rice',       theme:'menu-panel-green', badge:'🦐 Seafood',       badgeBg:'#FCD116', badgeColor:'#1A1209' },
+  sauces:  { num:'04', name:'With Rice / Sauces',             script:'all served with rice',        theme:'menu-panel-cream', badge:'🍛 $18–$23',       badgeBg:'#1A1209', badgeColor:'#FFF6D6' },
+  desserts:{ num:'05', name:'Sides & Sweets',                 script:'to go with it',               theme:'menu-panel-red',   badge:'🍮 Sweet',         badgeBg:'#FCD116', badgeColor:'#1A1209' },
+  drinks:  { num:'06', name:'Drinks',                         script:'house-made & bottled',        theme:'menu-panel-green', badge:'🥤 Refresh',       badgeBg:'#FCD116', badgeColor:'#1A1209' },
 };
 
-const CAT_ORDER = ['special','grill','fryer','stew','sauces','desserts','drinks'];
+const CAT_ORDER = ['grill','special','stew','sauces','desserts','drinks'];
 
 const DD  = 'https://www.doordash.com/store/djoliba-philadelphia-31716157/';
 const UE  = 'https://www.ubereats.com/store/djoliba-6735-elmwood-avenue/uOYLNBFFW3WuG21foNTmFw';
