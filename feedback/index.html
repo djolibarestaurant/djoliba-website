@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feedback — Djoliba Restaurant</title>
+<meta name="description" content="Tell us how your meal at Djoliba Restaurant was. It takes 30 seconds.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#1A3D2B">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#1A3D2B;color:#FAF7F2;font-family:'Outfit',sans-serif}
+  .flag{display:flex;height:6px}.flag span{flex:1}
+  header{text-align:center;padding:28px 16px 8px}
+  header a{color:inherit;text-decoration:none;display:inline-flex;flex-direction:column;align-items:center;gap:8px}
+  header img{width:72px;height:72px;object-fit:contain}
+  header .name{font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:4px;line-height:1}
+  header .tag{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#FFD166}
+  main{max-width:680px;margin:0 auto;padding:8px 16px 40px}
+  iframe{width:100%;border:0;min-height:900px;display:block}
+  footer{text-align:center;font-size:14px;color:#C9D6CD;padding:0 16px 32px}
+  footer a{color:#FFD166}
+</style>
+</head>
+<body>
+<div class="flag" aria-hidden="true"><span style="background:#C5192D"></span><span style="background:#FCD116"></span><span style="background:#006B43"></span></div>
+<header>
+  <a href="/">
+    <img src="/menu/djoliba-logo.png" alt="">
+    <span class="name">Djoliba</span>
+    <span class="tag">Authentic Guinean Cuisine</span>
+  </a>
+</header>
+<main>
+  <iframe data-tally-src="https://tally.so/embed/5XbDqb?hideTitle=0&transparentBackground=1&dynamicHeight=1" loading="lazy" title="Djoliba feedback form"></iframe>
+</main>
+<footer>
+  <a href="/">Back to djolibarestaurant.net</a> · (215) 492-0979
+</footer>
+<script async src="https://tally.so/widgets/embed.js" onload="Tally.loadEmbeds()"></script>
+<script>
+  // Fallback if the embed script is blocked
+  setTimeout(function(){var f=document.querySelector('iframe[data-tally-src]');if(f&&!f.src){f.src=f.dataset.tallySrc;}},3000);
+</script>
+</body>
+</html>
